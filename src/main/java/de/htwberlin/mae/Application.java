@@ -1,16 +1,18 @@
-package de.htwberlin.mae.spring.boot;
+package de.htwberlin.mae;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { 
-		"de.htwberlin.mae.spring.controller",
-		"de.htwberlin.mae.spring.model"})
+@ComponentScan({"de.htwberlin.mae.model",
+				"de.htwberlin.mae.repository",
+				"de.htwberlin.mae"})
 public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
+
 }
