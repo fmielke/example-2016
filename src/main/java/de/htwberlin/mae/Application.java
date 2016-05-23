@@ -1,6 +1,8 @@
 package de.htwberlin.mae;
 
 
+import java.util.Properties;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,7 +14,11 @@ import org.springframework.context.annotation.ComponentScan;
 public class Application {
 
     public static void main(String[] args) {
-    	System.out.println("ENV_SYSTEM: " + System.getenv("ENV_SYSTEM"));
+    	if(System.getenv("ENV_SYSTEM") == null) {
+    		Properties props = System.getProperties();
+    		props.setProperty("ENV_SYSTEM", "local");
+    	}
+    	System.out.println("ENV_SYSTEM: " + System.getProperty("ENV_SYSTEM"));
         SpringApplication.run(Application.class, args);
     }
 
