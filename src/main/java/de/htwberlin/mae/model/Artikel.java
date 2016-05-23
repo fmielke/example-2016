@@ -10,7 +10,7 @@ public class Artikel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long artikelId;
+	private Long artikelId;
 
 	private String produktCode;
 	private String bezeichnung;
@@ -24,6 +24,15 @@ public class Artikel {
 		this.preis = preis;
 	}
 
+	
+	public Long getArtikelId() {
+		return artikelId;
+	}
+	
+	public void setArtikelId(Long artikelId) {
+		this.artikelId = artikelId;
+	}
+	
 	public String getProduktCode() {
 		return produktCode;
 	}

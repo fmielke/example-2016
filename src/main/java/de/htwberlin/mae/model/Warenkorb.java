@@ -1,13 +1,10 @@
 package de.htwberlin.mae.model;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Warenkorb {
@@ -16,7 +13,35 @@ public class Warenkorb {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long warenkorbId;
 	
+	@ManyToOne
+	private Artikel artikel;
+	@ManyToOne
+	private Nutzer nutzer;
+	
 	private Integer anzahl;
+
+	
+	public Warenkorb(Nutzer nutzer, Artikel artikel, Integer anzahl){
+		this.nutzer = nutzer;
+		this.artikel = artikel;
+		this.anzahl = anzahl;
+	}
+		
+	public Nutzer getNutzer() {
+		return nutzer;
+	}
+
+	public void setNutzer(Nutzer nutzer) {
+		this.nutzer = nutzer;
+	}
+	
+	public Artikel getArtikel() {
+		return artikel;
+	}
+
+	public void setArtikel(Artikel artikel) {
+		this.artikel = artikel;
+	}
 
 	public Integer getAnzahl() {
 		return anzahl;
@@ -25,7 +50,4 @@ public class Warenkorb {
 	public void setAnzahl(Integer anzahl) {
 		this.anzahl = anzahl;
 	}
-	
-	
-	
 }
