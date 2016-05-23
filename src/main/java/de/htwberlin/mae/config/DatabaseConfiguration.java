@@ -1,4 +1,4 @@
-package de.htwberlin.mae;
+package de.htwberlin.mae.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Primary;
 import javax.sql.DataSource;
 
 @Configuration
-public class DatabaseConfig {
+public class DatabaseConfiguration {
     @Bean
     @Primary
     @ConfigurationProperties(prefix = "spring.datasource")
