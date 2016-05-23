@@ -20,6 +20,7 @@ public class Warenkorb {
 	
 	private Integer anzahl;
 
+	public Warenkorb() {}
 	
 	public Warenkorb(Nutzer nutzer, Artikel artikel, Integer anzahl){
 		this.nutzer = nutzer;
