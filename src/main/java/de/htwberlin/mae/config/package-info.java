@@ -1,5 +1,5 @@
 /**
- * 
+ * This Package contains all classes to configure the application 
  */
 /**
  * @author marcus
