@@ -1,12 +1,9 @@
 package de.htwberlin.mae.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Nutzer {
@@ -16,9 +13,6 @@ public class Nutzer {
 	private long nutzerId;
 
 	private String name;
-	
-	@OneToMany
-	private List<Warenkorb> warenkoerbe;
 	
 	public Nutzer() {}
 	
@@ -43,13 +37,5 @@ public class Nutzer {
 		this.nutzerId = nutzerId;
 	}
 	
-	public List<Warenkorb> getWarenkoerbe() {
-		return warenkoerbe;
-	}
-
-	public void setWarenkoerbe(List<Warenkorb> warenkoerbe) {
-		this.warenkoerbe = warenkoerbe;
-	}
-
 }
 
