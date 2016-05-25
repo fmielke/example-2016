@@ -1,9 +1,12 @@
 package de.htwberlin.mae.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Artikel {
@@ -15,6 +18,9 @@ public class Artikel {
 	private String produktCode;
 	private String bezeichnung;
 	private Double preis;
+	
+	@OneToMany(mappedBy = "artikel")
+	private List<Warenkorb> warenkorb;
 		
 	public Artikel() {}
 	
@@ -55,6 +61,14 @@ public class Artikel {
 
 	public void setPreis(Double preis) {
 		this.preis = preis;
+	}
+	
+	public List<Warenkorb> getWarenkorb() {
+		return warenkorb;
+	}
+
+	public void setWarenkorb(List<Warenkorb> warenkorb) {
+		this.warenkorb = warenkorb;
 	}
 		
 }

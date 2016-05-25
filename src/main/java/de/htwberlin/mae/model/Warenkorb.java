@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -14,8 +15,11 @@ public class Warenkorb {
 	private long warenkorbId;
 	
 	@ManyToOne
+	@JoinColumn(name = "artikel_id")
 	private Artikel artikel;
+	
 	@ManyToOne
+	@JoinColumn(name = "nutzer_id")
 	private Nutzer nutzer;
 	
 	private Integer anzahl;

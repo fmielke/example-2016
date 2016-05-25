@@ -40,9 +40,9 @@ public class DatabasePreparationBean implements CommandLineRunner {
 		nutzer.add(new Nutzer("Marcus Schindler"));
 		nutzer.add(new Nutzer("Fabian Mielke"));
 		nutzer.add(new Nutzer("Florian Heilscher"));
-		nutzer.add(new Nutzer("Aristide Defou"));
-		nutzer.add(new Nutzer("Eddy K"));
-		nutzer.add(new Nutzer("Mai Hong"));
+		nutzer.add(new Nutzer("Aristide Defo"));
+		nutzer.add(new Nutzer("Edmodn Kengne"));
+		nutzer.add(new Nutzer("Mai Hong Nguyen"));
 		nutzerRepository.save(nutzer);
 		
 		
