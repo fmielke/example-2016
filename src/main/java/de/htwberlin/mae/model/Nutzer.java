@@ -17,8 +17,8 @@ public class Nutzer {
 
 	private String name;
 	
-	@OneToMany
-	private List<Warenkorb> warenkoerbe;
+	@OneToMany(mappedBy = "nutzer")
+	private List<Warenkorb> warenkorb;
 	
 	public Nutzer() {}
 	
@@ -43,13 +43,13 @@ public class Nutzer {
 		this.nutzerId = nutzerId;
 	}
 	
-	public List<Warenkorb> getWarenkoerbe() {
-		return warenkoerbe;
+	public List<Warenkorb> getWarenkorb() {
+		return warenkorb;
 	}
 
-	public void setWarenkoerbe(List<Warenkorb> warenkoerbe) {
-		this.warenkoerbe = warenkoerbe;
+	public void setWarenkorb(List<Warenkorb> warenkorb) {
+		this.warenkorb = warenkorb;
 	}
-
+	
 }
 

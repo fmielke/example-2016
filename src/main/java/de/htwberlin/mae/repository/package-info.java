@@ -1,5 +1,5 @@
 /**
- * 
+ * This package contains all JPA Repositories.
  */
 /**
  * @author marcus

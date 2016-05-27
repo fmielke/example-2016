@@ -19,8 +19,8 @@ public class Artikel {
 	private String bezeichnung;
 	private Double preis;
 	
-	@OneToMany
-	private List<Warenkorb> warenkoerbe;
+	@OneToMany(mappedBy = "artikel")
+	private List<Warenkorb> warenkorb;
 		
 	public Artikel() {}
 	
@@ -63,12 +63,12 @@ public class Artikel {
 		this.preis = preis;
 	}
 	
-	public List<Warenkorb> getWarenkoerbe() {
-		return warenkoerbe;
+	public List<Warenkorb> getWarenkorb() {
+		return warenkorb;
 	}
 
-	public void setWarenkoerbe(List<Warenkorb> warenkoerbe) {
-		this.warenkoerbe = warenkoerbe;
+	public void setWarenkorb(List<Warenkorb> warenkorb) {
+		this.warenkorb = warenkorb;
 	}
 		
 }
