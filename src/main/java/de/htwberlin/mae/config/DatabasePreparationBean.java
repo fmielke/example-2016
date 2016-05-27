@@ -1,4 +1,4 @@
-package de.htwberlin.mae.bean;
+package de.htwberlin.mae.config;
 
 import java.util.ArrayList;
 
@@ -31,6 +31,7 @@ public class DatabasePreparationBean implements CommandLineRunner {
 	
 	@Autowired
 	private WarenkorbRepository warenkorbRepository;
+	
 	
 	public void run(String... args) {
 		//Spring Data JPA increments Id over all tables, not for each table
@@ -73,5 +74,7 @@ public class DatabasePreparationBean implements CommandLineRunner {
 		warenkorbs.add(new Warenkorb(nutzerRepository.findOne(4L), artikelRepository.findOne(7L), 3));
 		warenkorbs.add(new Warenkorb(nutzerRepository.findOne(5L), artikelRepository.findOne(7L), 5));
 		warenkorbRepository.save(warenkorbs);
+		
+		
 	}
 }
