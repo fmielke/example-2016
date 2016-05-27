@@ -1,4 +1,4 @@
-package de.htwberlin.mae.config;
+package de.htwberlin.mae.configuration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

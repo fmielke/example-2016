@@ -1,4 +1,4 @@
-package de.htwberlin.mae.config;
+package de.htwberlin.mae.configuration;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;

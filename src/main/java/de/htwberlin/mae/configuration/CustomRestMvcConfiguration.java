@@ -1,4 +1,4 @@
-package de.htwberlin.mae.config;
+package de.htwberlin.mae.configuration;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;
