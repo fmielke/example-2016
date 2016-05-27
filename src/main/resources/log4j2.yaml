@@ -1,0 +1,22 @@
+Configuration:
+  status: warn
+  Appenders:
+    Console:
+      name: console
+      PatternLayout:
+        pattern: "%d{ISO8601} %-5p [%c{3}] [%t] %m%n"
+    RollingFile:
+      name: file
+      fileName: var/log4j2/error_log.log
+      filePattern: "var/log4j2/error_log.%d{yyyy-MM-dd}-%i.log.gz"
+      PatternLayout:
+        pattern: "%d{ISO8601} %-5p [%c{3}] [%t] %m%n"
+      Policies:
+        SizeBasedTriggeringPolicy:
+          size: 25 KB
+  Loggers:
+    Root:
+      level: info
+      AppenderRef:
+        - ref: console
+        - ref: file
