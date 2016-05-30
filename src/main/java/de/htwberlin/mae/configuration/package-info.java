@@ -5,4 +5,4 @@
  * @author marcus
  *
  */
-package de.htwberlin.mae.config;
+package de.htwberlin.mae.configuration;

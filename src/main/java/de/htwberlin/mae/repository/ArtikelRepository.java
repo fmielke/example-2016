@@ -15,6 +15,8 @@ import de.htwberlin.mae.model.Artikel;
 @RepositoryRestResource(collectionResourceRel = "artikel", path = "artikel")
 public interface ArtikelRepository extends PagingAndSortingRepository<Artikel, Long> {
 	
+	
+	
 	List<Artikel> findByBezeichnung(@Param("bezeichnung") String bezeichnung);
 	List<Artikel> findByPreis(@Param("preis") Double preis);
 	
