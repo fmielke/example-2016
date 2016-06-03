@@ -1,0 +1,28 @@
+Configuration:
+  status: warn
+  Appenders:
+    Console:
+      name: console-local
+      PatternLayout:
+        pattern: "%d{ISO8601} %-5p [%c{3}] [%t] %m%n"
+    RollingFile:
+      name: file-local
+      fileName: var/log4j2/error_log.log
+      filePattern: "var/log4j2/error_log.%d{yyyy-MM-dd}-%i.log.gz"
+      PatternLayout:
+        pattern: "%d{ISO8601} %-5p [%c{3}] [%t] %m%n"
+      Policies:
+        SizeBasedTriggeringPolicy:
+          size: 10 MB
+    Logentries:
+      name: le-local
+      token: 97698b39-faf4-4951-90e0-93efbc204f2f
+      Patternlayout:
+        pattern: "%d{ISO8601} %-5p [%c{3}] [%t] %m%n"
+  Loggers:
+    Root:
+      level: info
+      AppenderRef:
+        - ref: console-local
+        - ref: file-local
+        - ref: le-local
