@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar  target/example-2016-0.1.0.jar -J-javaagent:target/dependency/newrelic-agent.jar -J-Dnewrelic.config.file=newrelic.yml
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar target/example-2016-0.1.0.jar
