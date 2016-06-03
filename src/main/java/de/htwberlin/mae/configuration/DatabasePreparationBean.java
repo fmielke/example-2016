@@ -6,6 +6,7 @@ import de.htwberlin.mae.model.Warenkorb;
 import de.htwberlin.mae.repository.ArtikelRepository;
 import de.htwberlin.mae.repository.NutzerRepository;
 import de.htwberlin.mae.repository.WarenkorbRepository;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,7 @@ public class DatabasePreparationBean implements CommandLineRunner {
 	private WarenkorbRepository warenkorbRepository;
 
     private static Logger log = LogManager.getRootLogger();
-	
-	
+
 	public void run(String... args) {
         try {
             //Spring Data JPA increments Id over all tables, not for each table
@@ -81,7 +81,7 @@ public class DatabasePreparationBean implements CommandLineRunner {
             warenkorbs.add(new Warenkorb(nutzerRepository.findOne(4L), artikelRepository.findOne(7L), 3));
             warenkorbs.add(new Warenkorb(nutzerRepository.findOne(5L), artikelRepository.findOne(7L), 5));
             warenkorbRepository.save(warenkorbs);
-
+            
             log.info("db initial setup ends");
         }
         catch (Exception ex) {
