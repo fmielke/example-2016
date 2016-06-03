@@ -14,6 +14,7 @@ import de.htwberlin.mae.model.Nutzer;
 @RepositoryRestResource(collectionResourceRel = "nutzer", path = "nutzer")
 public interface NutzerRepository extends PagingAndSortingRepository<Nutzer, Long> {
 	
+	//restresources found under /nutzer/search/...
 	@RestResource(path = "names", rel = "names")
-	List<Nutzer> findByName(@Param("name") String name);
+	List<Nutzer> findByName(@Param("name") String name);	
 }
