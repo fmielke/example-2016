@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -59,5 +60,5 @@ public class ArtikelBulkController {
         // add other links as needed
         URI location = new URI("api/artikel");
         return ResponseEntity.created(location).header("MyResponseHeader", "MyValue").body(addedArtikel);
-	}	
+	}
 }

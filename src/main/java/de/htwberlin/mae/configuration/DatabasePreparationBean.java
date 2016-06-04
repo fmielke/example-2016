@@ -53,6 +53,19 @@ public class DatabasePreparationBean implements CommandLineRunner {
             nutzer.add(new Nutzer("Mai Hong Nguyen"));
             nutzerRepository.save(nutzer);
 
+            log.info("Cached: " + nutzerRepository.findAll().iterator().next().getName()  + " Hash: " + nutzerRepository.findAll().hashCode());
+            log.info("Cached: " + nutzerRepository.findAll().iterator().next().getName()  + " Hash: " + nutzerRepository.findAll().hashCode());
+            log.info("Cached: " + nutzerRepository.findAll().iterator().next().getName()  + " Hash: " + nutzerRepository.findAll().hashCode());
+            log.info("Cached: " + nutzerRepository.findAll().iterator().next().getName()  + " Hash: " + nutzerRepository.findAll().hashCode());
+            log.info("Insert" + nutzerRepository.save(new Nutzer("Hans Meier")).getName());
+            log.info("Cached: " + nutzerRepository.findAll().iterator().next().getName()  + " Hash: " + nutzerRepository.findAll().hashCode());
+            log.info("Cached: " + nutzerRepository.findAll().iterator().next().getName()  + " Hash: " + nutzerRepository.findAll().hashCode());
+            log.info("Cached: " + nutzerRepository.findAll().iterator().next().getName()  + " Hash: " + nutzerRepository.findAll().hashCode());
+            log.info("Cached: " + nutzerRepository.findAll().iterator().next().getName()  + " Hash: " + nutzerRepository.findAll().hashCode());
+            log.info("Cached: " + nutzerRepository.findAll().iterator().next().getName()  + " Hash: " + nutzerRepository.findAll().hashCode());
+            log.info("Cached: " + nutzerRepository.findAll().iterator().next().getName()  + " Hash: " + nutzerRepository.findAll().hashCode());
+            
+            
             log.info("db initial setup artikel starts");
             //store artikel -> ID 7-13
             ArrayList<Artikel> artikel = new ArrayList<Artikel>();
@@ -64,23 +77,47 @@ public class DatabasePreparationBean implements CommandLineRunner {
             artikel.add(new Artikel("ID-1205", 1.49, "Chips"));
             artikel.add(new Artikel("ID-1206", 0.69, "Wasser"));
             artikelRepository.save(artikel);
+            
+            
+           log.info("Cached: " + artikelRepository.findAll().iterator().next().getBezeichnung()  + " Hash: " + artikelRepository.findAll().hashCode());
+           log.info("Cached: " + artikelRepository.findAll().iterator().next().getBezeichnung()  + " Hash: " + artikelRepository.findAll().hashCode());
+           log.info("Cached: " + artikelRepository.findAll().iterator().next().getBezeichnung()  + " Hash: " + artikelRepository.findAll().hashCode());
+           log.info("Cached: " + artikelRepository.findAll().iterator().next().getBezeichnung()  + " Hash: " + artikelRepository.findAll().hashCode());
+           log.info("Insert: " + artikelRepository.save(new Artikel("d-123", 1.99, "Dusche")).getBezeichnung());
+           log.info("Cached: " + artikelRepository.findAll().iterator().next().getBezeichnung()  + " Hash: " + artikelRepository.findAll().hashCode());
+           log.info("Cached: " + artikelRepository.findAll().iterator().next().getBezeichnung()  + " Hash: " + artikelRepository.findAll().hashCode());
+           log.info("Cached: " + artikelRepository.findAll().iterator().next().getBezeichnung()  + " Hash: " + artikelRepository.findAll().hashCode());
+           log.info("Cached: " + artikelRepository.findAll().iterator().next().getBezeichnung()  + " Hash: " + artikelRepository.findAll().hashCode());
+           log.info("Cached: " + artikelRepository.findAll().iterator().next().getBezeichnung()  + " Hash: " + artikelRepository.findAll().hashCode());
+           log.info("Cached: " + artikelRepository.findAll().iterator().next().getBezeichnung()  + " Hash: " + artikelRepository.findAll().hashCode());
 
             log.info("db initial setup warenkorb starts");
             //store warenkörbe -> X-Y
             ArrayList<Warenkorb> warenkorbs = new ArrayList<Warenkorb>();
-            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(1L), artikelRepository.findOne(7L), 3));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(1L), artikelRepository.findOne(9L), 2));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(1L), artikelRepository.findOne(11L), 1));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(1L), artikelRepository.findOne(12L), 2));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(2L), artikelRepository.findOne(7L), 1));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(2L), artikelRepository.findOne(8L), 1));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(3L), artikelRepository.findOne(10L), 1));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(4L), artikelRepository.findOne(12L), 4));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(5L), artikelRepository.findOne(13L), 1));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(6L), artikelRepository.findOne(13L), 2));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(4L), artikelRepository.findOne(7L), 3));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(5L), artikelRepository.findOne(7L), 5));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(1L), artikelRepository.findByBezeichnung("Bier").get(0), 3));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(1L), artikelRepository.findByBezeichnung("Wein").get(0), 2));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(1L), artikelRepository.findByBezeichnung("Zigaretten").get(0), 1));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(1L), artikelRepository.findByBezeichnung("Bier").get(0), 2));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(2L), artikelRepository.findByBezeichnung("Rum").get(0), 1));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(2L), artikelRepository.findByBezeichnung("Bier").get(0), 1));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(3L), artikelRepository.findByBezeichnung("Bier").get(0), 11));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(4L), artikelRepository.findByBezeichnung("Chips").get(0), 5));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(5L), artikelRepository.findByBezeichnung("Bier").get(0), 1));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(6L), artikelRepository.findByBezeichnung("Wasser").get(0), 2));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(4L), artikelRepository.findByBezeichnung("Bier").get(0), 3));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(5L), artikelRepository.findByBezeichnung("Wasser").get(0), 5));
             warenkorbRepository.save(warenkorbs);
+            
+            
+            log.info("Cached: " + warenkorbRepository.findAll().hashCode());
+            log.info("Cached: " + warenkorbRepository.findAll().hashCode());
+            log.info("Cached: " + warenkorbRepository.findAll().hashCode());
+            log.info("Delete: ");
+            warenkorbRepository.delete(18L);
+            log.info("Cached: " + warenkorbRepository.findAll().hashCode());
+            log.info("Cached: " + warenkorbRepository.findAll().hashCode());
+            log.info("Cached: " + warenkorbRepository.findAll().hashCode());
+            log.info("Cached: " + warenkorbRepository.findAll().hashCode());
             
             log.info("db initial setup ends");
         }
