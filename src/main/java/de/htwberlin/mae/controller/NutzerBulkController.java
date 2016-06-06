@@ -18,13 +18,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import de.htwberlin.mae.model.Nutzer;
 import de.htwberlin.mae.repository.NutzerRepository;
 
-@RequestMapping("/bulk/nutzer")
-//@RepositoryRestController
-@Controller
+//TODO es sollte eigenlich mit repositoryrestcontroller funktionieren
+@RepositoryRestController
 public class NutzerBulkController {
 	
 	@Autowired
@@ -39,11 +39,10 @@ public class NutzerBulkController {
 	
 	//TODO Diese funktion muss noch eine HATOAS konformes result liefen. bisher nur arraylist
 	@RequestMapping(
-			value = "",
-			method = RequestMethod.POST,
-			produces = "application/de.htwberlin.mae.nutzer.bulk+json"
+			value = "/nutzer/bulk",
+			method = RequestMethod.POST
 			)
-	public ResponseEntity<ArrayList<Resource<Nutzer>>> saveBulkNutzer(@RequestBody List<Nutzer> newNutzer, Pageable pageable) throws URISyntaxException {
+	public @ResponseBody ResponseEntity<ArrayList<Resource<Nutzer>>> saveBulkNutzer(@RequestBody List<Nutzer> newNutzer, Pageable pageable) throws URISyntaxException {
 
 		ArrayList<Nutzer> nutzerAdded = new ArrayList<Nutzer>();
 		

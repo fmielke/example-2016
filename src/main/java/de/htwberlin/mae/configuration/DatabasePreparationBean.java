@@ -52,7 +52,7 @@ public class DatabasePreparationBean implements CommandLineRunner {
             nutzer.add(new Nutzer("Edmodn Kengne"));
             nutzer.add(new Nutzer("Mai Hong Nguyen"));
             nutzerRepository.save(nutzer);
-
+/*
             log.info("Cached: " + nutzerRepository.findAll().iterator().next().getName()  + " Hash: " + nutzerRepository.findAll().hashCode());
             log.info("Cached: " + nutzerRepository.findAll().iterator().next().getName()  + " Hash: " + nutzerRepository.findAll().hashCode());
             log.info("Cached: " + nutzerRepository.findAll().iterator().next().getName()  + " Hash: " + nutzerRepository.findAll().hashCode());
@@ -64,7 +64,7 @@ public class DatabasePreparationBean implements CommandLineRunner {
             log.info("Cached: " + nutzerRepository.findAll().iterator().next().getName()  + " Hash: " + nutzerRepository.findAll().hashCode());
             log.info("Cached: " + nutzerRepository.findAll().iterator().next().getName()  + " Hash: " + nutzerRepository.findAll().hashCode());
             log.info("Cached: " + nutzerRepository.findAll().iterator().next().getName()  + " Hash: " + nutzerRepository.findAll().hashCode());
-            
+            */
             
             log.info("db initial setup artikel starts");
             //store artikel -> ID 7-13
@@ -78,7 +78,7 @@ public class DatabasePreparationBean implements CommandLineRunner {
             artikel.add(new Artikel("ID-1206", 0.69, "Wasser"));
             artikelRepository.save(artikel);
             
-            
+           /* 
            log.info("Cached: " + artikelRepository.findAll().iterator().next().getBezeichnung()  + " Hash: " + artikelRepository.findAll().hashCode());
            log.info("Cached: " + artikelRepository.findAll().iterator().next().getBezeichnung()  + " Hash: " + artikelRepository.findAll().hashCode());
            log.info("Cached: " + artikelRepository.findAll().iterator().next().getBezeichnung()  + " Hash: " + artikelRepository.findAll().hashCode());
@@ -90,7 +90,7 @@ public class DatabasePreparationBean implements CommandLineRunner {
            log.info("Cached: " + artikelRepository.findAll().iterator().next().getBezeichnung()  + " Hash: " + artikelRepository.findAll().hashCode());
            log.info("Cached: " + artikelRepository.findAll().iterator().next().getBezeichnung()  + " Hash: " + artikelRepository.findAll().hashCode());
            log.info("Cached: " + artikelRepository.findAll().iterator().next().getBezeichnung()  + " Hash: " + artikelRepository.findAll().hashCode());
-
+*/
             log.info("db initial setup warenkorb starts");
             //store warenkörbe -> X-Y
             ArrayList<Warenkorb> warenkorbs = new ArrayList<Warenkorb>();
@@ -108,7 +108,7 @@ public class DatabasePreparationBean implements CommandLineRunner {
             warenkorbs.add(new Warenkorb(nutzerRepository.findOne(5L), artikelRepository.findByBezeichnung("Wasser").get(0), 5));
             warenkorbRepository.save(warenkorbs);
             
-            
+            /*
             log.info("Cached: " + warenkorbRepository.findAll().hashCode());
             log.info("Cached: " + warenkorbRepository.findAll().hashCode());
             log.info("Cached: " + warenkorbRepository.findAll().hashCode());
@@ -118,7 +118,7 @@ public class DatabasePreparationBean implements CommandLineRunner {
             log.info("Cached: " + warenkorbRepository.findAll().hashCode());
             log.info("Cached: " + warenkorbRepository.findAll().hashCode());
             log.info("Cached: " + warenkorbRepository.findAll().hashCode());
-            
+            */
             log.info("db initial setup ends");
         }
         catch (Exception ex) {

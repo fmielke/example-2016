@@ -18,13 +18,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import de.htwberlin.mae.model.Artikel;
 import de.htwberlin.mae.repository.ArtikelRepository;
 
-@RequestMapping("/bulk/artikel")
-//@RepositoryRestResource
-@Controller
+
+@RepositoryRestResource
 public class ArtikelBulkController {
 
 	@Autowired
@@ -39,11 +39,10 @@ public class ArtikelBulkController {
 	
 	//TODO Diese funktion muss noch eine HATOAS konformes result liefen. Die Self Ref links müssen noch angepasst werden
 	@RequestMapping(
-			value = "",
-			method = RequestMethod.POST,
-			produces = "application/de.htwberlin.mae.artikel.bulk+json"
+			value = "/artikel/bulk",
+			method = RequestMethod.POST
 			)
-	public ResponseEntity<ArrayList<Resource<Artikel>>> saveBulkArtikel(@RequestBody List<Artikel> newArtikel, Pageable pageable) throws URISyntaxException {
+	public @ResponseBody ResponseEntity<ArrayList<Resource<Artikel>>> saveBulkArtikel(@RequestBody List<Artikel> newArtikel, Pageable pageable) throws URISyntaxException {
 
 		ArrayList<Resource<Artikel>> addedArtikel = new ArrayList<Resource<Artikel>>();
 		//Set<Long> set = new HashSet<Long>();

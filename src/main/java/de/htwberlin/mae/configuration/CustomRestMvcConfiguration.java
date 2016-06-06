@@ -5,6 +5,9 @@ import java.util.Arrays;
 
 
 
+
+
+
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
@@ -17,6 +20,10 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import de.htwberlin.mae.model.Artikel;
+import de.htwberlin.mae.model.Nutzer;
+import de.htwberlin.mae.model.Warenkorb;
+
 
 @Configuration
 public class CustomRestMvcConfiguration extends RepositoryRestMvcConfiguration {
@@ -28,6 +35,9 @@ public class CustomRestMvcConfiguration extends RepositoryRestMvcConfiguration {
 	public RepositoryRestConfiguration config() {
 		RepositoryRestConfiguration config = super.config();
 		config.setBasePath("/api");
+		config.exposeIdsFor(Nutzer.class);
+		config.exposeIdsFor(Artikel.class);
+		config.exposeIdsFor(Warenkorb.class);
 		return config;
 	}
 	
