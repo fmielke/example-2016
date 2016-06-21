@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -25,12 +26,13 @@ public class Artikel {
 	private Long version;
 	
 	@JsonIgnore 
-	@LastModifiedDate
+	@LastModifiedDate //generates last-modified header
 	private LocalDateTime lastModifiedDate;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long artikelId;
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	private String artikelId;
 
 	private String produktCode;
 	private String bezeichnung;
@@ -48,11 +50,11 @@ public class Artikel {
 	}
 
 	
-	public Long getArtikelId() {
+	public String getArtikelId() {
 		return artikelId;
 	}
 	
-	public void setArtikelId(Long artikelId) {
+	public void setArtikelId(String artikelId) {
 		this.artikelId = artikelId;
 	}
 	

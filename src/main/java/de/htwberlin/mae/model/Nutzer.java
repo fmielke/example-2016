@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -25,14 +26,15 @@ public class Nutzer {
 	private Long version;
 	
 	@JsonIgnore 
-	@LastModifiedDate
+	@LastModifiedDate //generates last-modified header
 	private LocalDateTime lastModifiedDate;
 	
 
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long nutzerId;
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	private String nutzerId;
 
 	private String name;
 	
@@ -54,11 +56,11 @@ public class Nutzer {
 		this.name = name;
 	}
 
-	public long getNutzerId() {
+	public String getNutzerId() {
 		return nutzerId;
 	}
 
-	public void setNutzerId(long nutzerId) {
+	public void setNutzerId(String nutzerId) {
 		this.nutzerId = nutzerId;
 	}
 	

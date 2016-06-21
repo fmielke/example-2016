@@ -10,14 +10,14 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import de.htwberlin.mae.model.Warenkorb;
 
 @RepositoryRestResource(collectionResourceRel = "warenkorb", path = "warenkorb")
-public interface WarenkorbRepository extends PagingAndSortingRepository<Warenkorb, Long> {
+public interface WarenkorbRepository extends PagingAndSortingRepository<Warenkorb, String> {
 
 	/**
 	 * Override default JPA Methods to enable Spring Caching
 	 */
 	@Override
 	@Cacheable(value = "warenkorbCache")
-	Warenkorb findOne(Long id);
+	Warenkorb findOne(String id);
 
 	@Override
 	@Cacheable(value = "warenkorbCache")
@@ -29,7 +29,7 @@ public interface WarenkorbRepository extends PagingAndSortingRepository<Warenkor
 
 	@Override
 	@Cacheable(value = "warenkorbCache")
-	Iterable<Warenkorb> findAll(Iterable<Long> ids);
+	Iterable<Warenkorb> findAll(Iterable<String> ids);
 
 	@Override
 	@CacheEvict(value = "warenkorbCache", allEntries=true)
@@ -37,5 +37,5 @@ public interface WarenkorbRepository extends PagingAndSortingRepository<Warenkor
 
 	@Override
 	@CacheEvict(value = "warenkorbCache", allEntries=true)
-	void delete(Long id);
+	void delete(String id);
 }

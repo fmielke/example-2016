@@ -93,9 +93,16 @@ public class DatabasePreparationBean implements CommandLineRunner {
 */
             log.info("db initial setup warenkorb starts");
             //store warenkörbe -> X-Y
+            
             ArrayList<Warenkorb> warenkorbs = new ArrayList<Warenkorb>();
-            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(1L), artikelRepository.findByBezeichnung("Bier").get(0), 3));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findOne(1L), artikelRepository.findByBezeichnung("Wein").get(0), 2));
+            
+            warenkorbs.add(new Warenkorb(nutzerRepository.findByName("Marcus Schindler").get(0), artikelRepository.findByBezeichnung("Bier").get(0), 3));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findByName("Florian Heilscher").get(0), artikelRepository.findByBezeichnung("Bier").get(0), 3));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findByName("Fabian Mielke").get(0), artikelRepository.findByBezeichnung("Bier").get(0), 3));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findByName("Aristide Defo").get(0), artikelRepository.findByBezeichnung("Bier").get(0), 3));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findByName("Marcus Schindler").get(0), artikelRepository.findByBezeichnung("Bier").get(0), 3));
+            
+            /*warenkorbs.add(new Warenkorb(nutzerRepository.findByName("Marcus Schindler"), artikelRepository.findByBezeichnung("Wein").get(0), 2));
             warenkorbs.add(new Warenkorb(nutzerRepository.findOne(1L), artikelRepository.findByBezeichnung("Zigaretten").get(0), 1));
             warenkorbs.add(new Warenkorb(nutzerRepository.findOne(1L), artikelRepository.findByBezeichnung("Bier").get(0), 2));
             warenkorbs.add(new Warenkorb(nutzerRepository.findOne(2L), artikelRepository.findByBezeichnung("Rum").get(0), 1));
@@ -106,6 +113,7 @@ public class DatabasePreparationBean implements CommandLineRunner {
             warenkorbs.add(new Warenkorb(nutzerRepository.findOne(6L), artikelRepository.findByBezeichnung("Wasser").get(0), 2));
             warenkorbs.add(new Warenkorb(nutzerRepository.findOne(4L), artikelRepository.findByBezeichnung("Bier").get(0), 3));
             warenkorbs.add(new Warenkorb(nutzerRepository.findOne(5L), artikelRepository.findByBezeichnung("Wasser").get(0), 5));
+            */
             warenkorbRepository.save(warenkorbs);
             
             /*

@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -24,12 +25,14 @@ public class Warenkorb {
 	private Long version;
 	
 	@JsonIgnore 
-	@LastModifiedDate
+	@LastModifiedDate //generates last-modified header
 	private LocalDateTime lastModifiedDate;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long warenkorbId;
+	//@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	private String warenkorbId;
 	
 	@ManyToOne
 	@JoinColumn(name = "artikel_id")

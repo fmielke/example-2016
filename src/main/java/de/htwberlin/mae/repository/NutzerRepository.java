@@ -22,7 +22,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 import de.htwberlin.mae.model.Nutzer;
 
 @RepositoryRestResource(collectionResourceRel = "nutzer", path = "nutzer")
-public interface NutzerRepository extends PagingAndSortingRepository<Nutzer, Long> {
+public interface NutzerRepository extends PagingAndSortingRepository<Nutzer, String> {
 	
 	/**
 	 * Override default JPA Methods to enable Spring Caching
@@ -31,7 +31,7 @@ public interface NutzerRepository extends PagingAndSortingRepository<Nutzer, Lon
 	
 	@Override
 	@Cacheable(value = "nutzerCache")
-	Nutzer findOne(Long id);
+	Nutzer findOne(String id);
 	
 	
 	@Override
@@ -44,7 +44,7 @@ public interface NutzerRepository extends PagingAndSortingRepository<Nutzer, Lon
 	
 	@Override
 	@Cacheable(value = "nutzerCache")
-	Iterable<Nutzer> findAll(Iterable<Long> ids);
+	Iterable<Nutzer> findAll(Iterable<String> ids);
 	
 	@Override
 	@CacheEvict(value = "nutzerCache", allEntries=true) //cacheEvict allEntries -> clear and reload Cache when Cache changed
@@ -52,12 +52,12 @@ public interface NutzerRepository extends PagingAndSortingRepository<Nutzer, Lon
 
 	@Override
 	@CacheEvict(value = "nutzerCache", allEntries=true)
-	void delete(Long id);
+	void delete(String id);
 	
 	//restresources found under /nutzer/search/...
 	@RestResource(path = "names", rel = "names")
 	List<Nutzer> findByName(@Param("name") String name);
 	
 	@Query("SELECT nutzerId, name FROM Nutzer n WHERE n.nutzerId IN :ids")
-	List<Nutzer> findByIdsCustom(@Param("ids") Set<Long> ids, Pageable pageable);
+	List<Nutzer> findByIdsCustom(@Param("ids") Set<String> ids, Pageable pageable);
 }
