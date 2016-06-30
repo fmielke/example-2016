@@ -1,4 +1,4 @@
-package de.htwberlin.mae.configuration;
+package de.htwberlin.mae.oauth2;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,9 +12,9 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
-import static de.htwberlin.mae.configuration.OAuth2Configuration.PERMISSION_NUTZER_DELETE;
-import static de.htwberlin.mae.configuration.OAuth2Configuration.PERMISSION_NUTZER_READ;
-import static de.htwberlin.mae.configuration.OAuth2Configuration.PERMISSION_NUTZER_WRITE;
+import static de.htwberlin.mae.oauth2.OAuth2Configuration.PERMISSION_NUTZER_DELETE;
+import static de.htwberlin.mae.oauth2.OAuth2Configuration.PERMISSION_NUTZER_READ;
+import static de.htwberlin.mae.oauth2.OAuth2Configuration.PERMISSION_NUTZER_WRITE;
 
 /**
  * Created by fmielke on 29.06.16.
