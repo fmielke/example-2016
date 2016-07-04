@@ -2,6 +2,7 @@ package de.htwberlin.mae.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -33,8 +34,8 @@ public class Nutzer {
 
 	@Id
 	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
-	private String nutzerId;
+	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
+	private UUID nutzerId;
 
 	private String name;
 	
@@ -56,11 +57,11 @@ public class Nutzer {
 		this.name = name;
 	}
 
-	public String getNutzerId() {
+	public UUID getNutzerId() {
 		return nutzerId;
 	}
 
-	public void setNutzerId(String nutzerId) {
+	public void setNutzerId(UUID nutzerId) {
 		this.nutzerId = nutzerId;
 	}
 	

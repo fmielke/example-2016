@@ -57,8 +57,8 @@ public class CustomRestMvcConfiguration extends RepositoryRestMvcConfiguration {
     private class HalMappingJackson2HttpMessageConverter extends MappingJackson2HttpMessageConverter {
         public HalMappingJackson2HttpMessageConverter() {
             setSupportedMediaTypes(Arrays.asList(
-            	new MediaType("application", "de.htwberlin.mae.v1+hal+json", Charset.defaultCharset()),
-            	new MediaType("application", "de.htwberlin.mae.v1+json", Charset.defaultCharset())
+            	new MediaType("application", "vnd.de.htwberlin.mae.v1+hal+json", Charset.defaultCharset()),
+            	new MediaType("application", "vnd.de.htwberlin.mae.v1+json", Charset.defaultCharset())
             ));
 
             ObjectMapper halObjectMapper = beanFactory.getBean(HAL_OBJECT_MAPPER_BEAN_NAME, ObjectMapper.class);

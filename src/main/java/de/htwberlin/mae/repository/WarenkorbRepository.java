@@ -1,5 +1,7 @@
 package de.htwberlin.mae.repository;
 
+import java.util.UUID;
+
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -10,14 +12,14 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import de.htwberlin.mae.model.Warenkorb;
 
 @RepositoryRestResource(collectionResourceRel = "warenkorb", path = "warenkorb")
-public interface WarenkorbRepository extends PagingAndSortingRepository<Warenkorb, String> {
+public interface WarenkorbRepository extends PagingAndSortingRepository<Warenkorb, UUID> {
 
 	/**
 	 * Override default JPA Methods to enable Spring Caching
 	 */
 	@Override
 	@Cacheable(value = "warenkorbCache")
-	Warenkorb findOne(String id);
+	Warenkorb findOne(UUID id);
 
 	@Override
 	@Cacheable(value = "warenkorbCache")
@@ -29,7 +31,7 @@ public interface WarenkorbRepository extends PagingAndSortingRepository<Warenkor
 
 	@Override
 	@Cacheable(value = "warenkorbCache")
-	Iterable<Warenkorb> findAll(Iterable<String> ids);
+	Iterable<Warenkorb> findAll(Iterable<UUID> ids);
 
 	@Override
 	@CacheEvict(value = "warenkorbCache", allEntries=true)
@@ -37,5 +39,5 @@ public interface WarenkorbRepository extends PagingAndSortingRepository<Warenkor
 
 	@Override
 	@CacheEvict(value = "warenkorbCache", allEntries=true)
-	void delete(String id);
+	void delete(UUID id);
 }

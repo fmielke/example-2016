@@ -30,9 +30,12 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/nutzer**").hasAuthority(PERMISSION_NUTZER_READ)
-                .antMatchers(HttpMethod.POST, "/api/nutzer**").hasAuthority(PERMISSION_NUTZER_WRITE)
-                .antMatchers(HttpMethod.DELETE, "/api/nutzer**").hasAuthority(PERMISSION_NUTZER_DELETE);
+                .antMatchers(HttpMethod.GET, "/api/nutzer/**").hasAuthority(PERMISSION_NUTZER_READ)
+                .antMatchers(HttpMethod.GET, "/api/**/**/nutzer/**").hasAuthority(PERMISSION_NUTZER_READ)
+                .antMatchers(HttpMethod.POST, "/api/nutzer/**").hasAuthority(PERMISSION_NUTZER_WRITE)
+                .antMatchers(HttpMethod.POST, "/api/**/**/nutzer/**").hasAuthority(PERMISSION_NUTZER_WRITE)
+                .antMatchers(HttpMethod.DELETE, "/api/nutzer/**").hasAuthority(PERMISSION_NUTZER_DELETE)
+        		.antMatchers(HttpMethod.DELETE, "/api/**/**/nutzer/**").hasAuthority(PERMISSION_NUTZER_DELETE);
     }
 
 

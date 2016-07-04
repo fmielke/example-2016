@@ -2,6 +2,7 @@ package de.htwberlin.mae.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -31,8 +32,8 @@ public class Artikel {
 
 	@Id
 	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
-	private String artikelId;
+	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
+	private UUID artikelId;
 
 	private String produktCode;
 	private String bezeichnung;
@@ -50,11 +51,11 @@ public class Artikel {
 	}
 
 	
-	public String getArtikelId() {
+	public UUID getArtikelId() {
 		return artikelId;
 	}
 	
-	public void setArtikelId(String artikelId) {
+	public void setArtikelId(UUID artikelId) {
 		this.artikelId = artikelId;
 	}
 	

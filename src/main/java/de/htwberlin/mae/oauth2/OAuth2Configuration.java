@@ -61,6 +61,7 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter{
     @Bean
     protected JwtAccessTokenConverter jwtTokenEnhancer() {
         log.info("Start convert in OAuth2Configuration.java");
+        //TODO use heroku variable to set password for encryption
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "mySecretKey".toCharArray());
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setKeyPair(keyStoreKeyFactory.getKeyPair("jwt"));

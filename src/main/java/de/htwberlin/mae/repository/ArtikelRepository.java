@@ -1,6 +1,7 @@
 package de.htwberlin.mae.repository;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -13,7 +14,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import de.htwberlin.mae.model.Artikel;
 
 @RepositoryRestResource(collectionResourceRel = "artikel", path = "artikel")
-public interface ArtikelRepository extends PagingAndSortingRepository<Artikel, String> {
+public interface ArtikelRepository extends PagingAndSortingRepository<Artikel, UUID> {
 
 	/**
 	 * Override default JPA Methods to enable Spring Caching
@@ -22,7 +23,7 @@ public interface ArtikelRepository extends PagingAndSortingRepository<Artikel, S
 	
 	//@Override
 	@Cacheable(value = "artikelCache")
-	Artikel findOne(String id);
+	Artikel findOne(UUID id);
 
 	@Override
 	@Cacheable(value = "artikelCache")
@@ -34,7 +35,7 @@ public interface ArtikelRepository extends PagingAndSortingRepository<Artikel, S
 	
 	//@Override
 	@Cacheable(value = "artikelCache")
-	Iterable<Artikel> findAll(Iterable<String> ids);
+	Iterable<Artikel> findAll(Iterable<UUID> ids);
 	
 	@Override
 	@CacheEvict(cacheNames="artikelCache", allEntries=true)
@@ -42,7 +43,7 @@ public interface ArtikelRepository extends PagingAndSortingRepository<Artikel, S
 
 	@Override
 	@CacheEvict(value = "artikelCache", allEntries=true)
-	void delete(String id);
+	void delete(UUID id);
 	
 	
 	List<Artikel> findByBezeichnung(@Param("bezeichnung") String bezeichnung);

@@ -1,6 +1,7 @@
 package de.htwberlin.mae.model;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -31,8 +32,8 @@ public class Warenkorb {
 	@Id
 	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
-	private String warenkorbId;
+	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
+	private UUID warenkorbId;
 	
 	@ManyToOne
 	@JoinColumn(name = "artikel_id")
@@ -51,7 +52,15 @@ public class Warenkorb {
 		this.artikel = artikel;
 		this.anzahl = anzahl;
 	}
-		
+	
+	public UUID getWarenkorbId() {
+		return warenkorbId;
+	}
+
+	public void setWarenkorbId(UUID warenkorbId) {
+		this.warenkorbId = warenkorbId;
+	}
+
 	public Nutzer getNutzer() {
 		return nutzer;
 	}
