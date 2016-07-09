@@ -20,9 +20,12 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 
 import org.springframework.data.rest.core.annotation.RestResource;
+import org.springframework.transaction.annotation.Transactional;
 
+import de.htwberlin.mae.configuration.CustomRestMvcConfiguration;
 import de.htwberlin.mae.model.Nutzer;
 
+@Transactional
 @RepositoryRestResource(collectionResourceRel = "nutzer", path = "nutzer")
 public interface NutzerRepository extends PagingAndSortingRepository<Nutzer, UUID> {
 	

@@ -34,13 +34,19 @@ public class CustomRestMvcConfiguration extends RepositoryRestMvcConfiguration {
 	@Override
 	public RepositoryRestConfiguration config() {
 		RepositoryRestConfiguration config = super.config();
-		config.setBasePath("/api");
+		config.setBasePath("/api/v1");
+		config.setDefaultMediaType(MediaType.parseMediaType("application/hal+json"));
+		config.setDefaultPageSize(5);
+		config.setMaxPageSize(100);
+		config.setPageParamName("offset");
+		config.setLimitParamName("limit");
 		config.exposeIdsFor(Nutzer.class);
 		config.exposeIdsFor(Artikel.class);
 		config.exposeIdsFor(Warenkorb.class);
 		return config;
 	}
 	
+		
 	/**
 	 * enable custom vendor specific hal+json support
 	 */

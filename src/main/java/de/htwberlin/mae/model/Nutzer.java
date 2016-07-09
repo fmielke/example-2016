@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -30,16 +32,16 @@ public class Nutzer {
 	@LastModifiedDate //generates last-modified header
 	private LocalDateTime lastModifiedDate;
 	
-
-
 	@Id
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
 	private UUID nutzerId;
 
+	@NotNull
+	@Size(min=2, max=255)
 	private String name;
 	
-	@OneToMany(mappedBy = "nutzer")
+	@OneToMany(mappedBy = "nutzer", fetch = FetchType.EAGER)
 	private List<Warenkorb> warenkorb;
 	
 	public Nutzer() {}

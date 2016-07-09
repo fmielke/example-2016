@@ -12,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -35,11 +38,16 @@ public class Artikel {
 	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
 	private UUID artikelId;
 
+	@NotNull
+	@Size(min=5)
 	private String produktCode;
+	@NotNull
+	@Size(min=2, max=255)
 	private String bezeichnung;
+	@Min(0)
 	private Double preis;
 	
-	@OneToMany(mappedBy = "artikel")
+	@OneToMany(mappedBy = "artikel", fetch = FetchType.EAGER)
 	private List<Warenkorb> warenkorb;
 		
 	public Artikel() {}

@@ -24,9 +24,9 @@ import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFacto
 @EnableAuthorizationServer
 public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter{
 
-    public static String PERMISSION_NUTZER_READ = "NUTZER_READ";
-    public static String PERMISSION_NUTZER_WRITE = "NUTZER_WRITE";
-    public static String PERMISSION_NUTZER_DELETE = "NUTZER_DELETE";
+    public static final String PERMISSION_NUTZER_READ = "NUTZER_READ";
+    public static final String PERMISSION_NUTZER_WRITE = "NUTZER_WRITE";
+    public static final String PERMISSION_NUTZER_DELETE = "NUTZER_DELETE";
 
     Logger log = LoggerFactory.getLogger(OAuth2Configuration.class);
 

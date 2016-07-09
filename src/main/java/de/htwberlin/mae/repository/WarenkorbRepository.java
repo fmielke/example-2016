@@ -8,9 +8,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.transaction.annotation.Transactional;
 
+import de.htwberlin.mae.configuration.CustomRestMvcConfiguration;
 import de.htwberlin.mae.model.Warenkorb;
 
+@Transactional
 @RepositoryRestResource(collectionResourceRel = "warenkorb", path = "warenkorb")
 public interface WarenkorbRepository extends PagingAndSortingRepository<Warenkorb, UUID> {
 

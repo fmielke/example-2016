@@ -10,9 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.htwberlin.mae.model.Artikel;
 
+@Transactional
 @RepositoryRestResource(collectionResourceRel = "artikel", path = "artikel")
 public interface ArtikelRepository extends PagingAndSortingRepository<Artikel, UUID> {
 

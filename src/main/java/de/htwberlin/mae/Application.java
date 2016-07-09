@@ -17,6 +17,8 @@ public class Application {
     	AppConfiguration.setEnvironmentProperties();
     	
         SpringApplication.run(Application.class, args);
+        
+        
     }
 
 }
