@@ -31,8 +31,8 @@ public class RestLimitInterceptor implements HandlerInterceptor {
 			//log.info("KEY: " +  key);
 			//check if user does not exceeds limits of 20 per minute
 			RestLimitServiceImpl restLimitService = new RestLimitServiceImpl();
-			restLimitService.incrementUsage(key);
-			if(restLimitService.isValid()){
+			restLimitService.incrementUsage(key, request);
+			if(restLimitService.isValid(request.getMethod())){
 				return true;
 			}
 			else{
