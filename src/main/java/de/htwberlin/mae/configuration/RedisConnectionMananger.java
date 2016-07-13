@@ -9,7 +9,7 @@ public class RedisConnectionMananger {
 
 	public static Jedis getConnection() throws URISyntaxException {
 		
-		if(System.getProperty("ENV_SYSTEM").equalsIgnoreCase("local")){
+		if(System.getenv("ENV_SYSTEM") == null){
 			Jedis jedis = new Jedis("localhost");
 	        return jedis;
 		}
