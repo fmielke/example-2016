@@ -24,8 +24,10 @@ public class Application extends WebMvcConfigurerAdapter {
     }
     
     //add interceptor for http requests on base Path
+    
     @Bean
     public MappedInterceptor myMappedInterceptor() {
         return new MappedInterceptor(new String[]{"/api/v1/**"}, new RestLimitInterceptor());
     }
+    
 }

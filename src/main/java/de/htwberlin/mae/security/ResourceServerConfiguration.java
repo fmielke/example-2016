@@ -30,26 +30,26 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/nutzer/**").hasAuthority(PERMISSION_NUTZER_READ)
-                .antMatchers(HttpMethod.GET, "/api/**/**/nutzer/**").hasAuthority(PERMISSION_NUTZER_READ)
-                .antMatchers(HttpMethod.POST, "/api/nutzer/**").hasAuthority(PERMISSION_NUTZER_WRITE)
-                .antMatchers(HttpMethod.POST, "/api/**/**/nutzer/**").hasAuthority(PERMISSION_NUTZER_WRITE)
-                .antMatchers(HttpMethod.DELETE, "/api/nutzer/**").hasAuthority(PERMISSION_NUTZER_DELETE)
-        		.antMatchers(HttpMethod.DELETE, "/api/**/**/nutzer/**").hasAuthority(PERMISSION_NUTZER_DELETE)
+                .antMatchers(HttpMethod.GET, "/nutzer/**").hasAuthority(PERMISSION_NUTZER_READ)
+                .antMatchers(HttpMethod.GET, "/**/**/nutzer/**").hasAuthority(PERMISSION_NUTZER_READ)
+                .antMatchers(HttpMethod.POST, "/nutzer/**").hasAuthority(PERMISSION_NUTZER_WRITE)
+                .antMatchers(HttpMethod.POST, "/**/**/nutzer/**").hasAuthority(PERMISSION_NUTZER_WRITE)
+                .antMatchers(HttpMethod.DELETE, "/nutzer/**").hasAuthority(PERMISSION_NUTZER_DELETE)
+        		.antMatchers(HttpMethod.DELETE, "/**/**/nutzer/**").hasAuthority(PERMISSION_NUTZER_DELETE)
         		
-        		.antMatchers(HttpMethod.GET, "/api/artikel/**").hasAuthority(PERMISSION_NUTZER_READ)
-                .antMatchers(HttpMethod.GET, "/api/**/**/artikel/**").hasAuthority(PERMISSION_NUTZER_READ)
-                .antMatchers(HttpMethod.POST, "/api/artikel/**").hasAuthority(PERMISSION_NUTZER_WRITE)
-                .antMatchers(HttpMethod.POST, "/api/**/**/artikel/**").hasAuthority(PERMISSION_NUTZER_WRITE)
-                .antMatchers(HttpMethod.DELETE, "/api/artikel/**").hasAuthority(PERMISSION_NUTZER_DELETE)
-        		.antMatchers(HttpMethod.DELETE, "/api/**/**/artikel/**").hasAuthority(PERMISSION_NUTZER_DELETE)
+        		.antMatchers(HttpMethod.GET, "/artikel/**").hasAuthority(PERMISSION_NUTZER_READ)
+                .antMatchers(HttpMethod.GET, "/**/**/artikel/**").hasAuthority(PERMISSION_NUTZER_READ)
+                .antMatchers(HttpMethod.POST, "/artikel/**").hasAuthority(PERMISSION_NUTZER_WRITE)
+                .antMatchers(HttpMethod.POST, "/**/**/artikel/**").hasAuthority(PERMISSION_NUTZER_WRITE)
+                .antMatchers(HttpMethod.DELETE, "/artikel/**").hasAuthority(PERMISSION_NUTZER_DELETE)
+        		.antMatchers(HttpMethod.DELETE, "/**/**/artikel/**").hasAuthority(PERMISSION_NUTZER_DELETE)
         		
-        		.antMatchers(HttpMethod.GET, "/api/warenkorb/**").hasAuthority(PERMISSION_NUTZER_READ)
-                .antMatchers(HttpMethod.GET, "/api/**/**/warenkorb/**").hasAuthority(PERMISSION_NUTZER_READ)
-                .antMatchers(HttpMethod.POST, "/api/warenkorb/**").hasAuthority(PERMISSION_NUTZER_WRITE)
-                .antMatchers(HttpMethod.POST, "/api/**/**/warenkorb/**").hasAuthority(PERMISSION_NUTZER_WRITE)
-                .antMatchers(HttpMethod.DELETE, "/api/warenkorb/**").hasAuthority(PERMISSION_NUTZER_DELETE)
-        		.antMatchers(HttpMethod.DELETE, "/api/**/**/warenkorb/**").hasAuthority(PERMISSION_NUTZER_DELETE);
+        		.antMatchers(HttpMethod.GET, "/warenkorb/**").hasAuthority(PERMISSION_NUTZER_READ)
+                .antMatchers(HttpMethod.GET, "/**/**/warenkorb/**").hasAuthority(PERMISSION_NUTZER_READ)
+                .antMatchers(HttpMethod.POST, "/warenkorb/**").hasAuthority(PERMISSION_NUTZER_WRITE)
+                .antMatchers(HttpMethod.POST, "/**/**/warenkorb/**").hasAuthority(PERMISSION_NUTZER_WRITE)
+                .antMatchers(HttpMethod.DELETE, "/warenkorb/**").hasAuthority(PERMISSION_NUTZER_DELETE)
+        		.antMatchers(HttpMethod.DELETE, "/**/**/warenkorb/**").hasAuthority(PERMISSION_NUTZER_DELETE);
     }
 
 

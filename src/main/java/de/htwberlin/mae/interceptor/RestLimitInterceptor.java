@@ -6,6 +6,7 @@ package de.htwberlin.mae.interceptor;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +27,14 @@ public class RestLimitInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException, URISyntaxException  {
 
+		
+		log.info("Requesting resource: " + request.getRequestURI());
+		
+		//use this to enable hal browser
+		if(request.getRequestURI().contains("/browser/")){
+			return true;
+		}
+		
 		if(request.getHeader("Authorization") != null){
 			String key = (request.getHeader("Authorization").contains("Bearer")) ? request.getHeader("Authorization").split("\\.")[1] : "noauth";
 			//log.info("KEY: " +  key);
