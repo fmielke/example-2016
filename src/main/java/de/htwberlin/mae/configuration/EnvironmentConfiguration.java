@@ -5,9 +5,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Properties;
 
-public class AppConfiguration {
+public class EnvironmentConfiguration {
 
-	public AppConfiguration() {}
+	public EnvironmentConfiguration() {}
 	
 	
 	/**

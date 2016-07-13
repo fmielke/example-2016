@@ -17,9 +17,11 @@ import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.handler.MappedInterceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import de.htwberlin.mae.interceptor.RestLimitInterceptor;
 import de.htwberlin.mae.model.Artikel;
 import de.htwberlin.mae.model.Nutzer;
 import de.htwberlin.mae.model.Warenkorb;
@@ -46,7 +48,12 @@ public class CustomRestMvcConfiguration extends RepositoryRestMvcConfiguration {
 		return config;
 	}
 	
-		
+	
+	
+	
+	
+	
+	
 	/**
 	 * enable custom vendor specific hal+json support
 	 */

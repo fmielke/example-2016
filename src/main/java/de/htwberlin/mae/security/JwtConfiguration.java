@@ -1,4 +1,4 @@
-package de.htwberlin.mae.oauth2;
+package de.htwberlin.mae.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

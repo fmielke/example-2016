@@ -1,4 +1,8 @@
-package de.htwberlin.mae.oauth2;
+package de.htwberlin.mae.security;
+
+import static de.htwberlin.mae.security.OAuth2Configuration.PERMISSION_NUTZER_DELETE;
+import static de.htwberlin.mae.security.OAuth2Configuration.PERMISSION_NUTZER_READ;
+import static de.htwberlin.mae.security.OAuth2Configuration.PERMISSION_NUTZER_WRITE;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,10 +15,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-
-import static de.htwberlin.mae.oauth2.OAuth2Configuration.PERMISSION_NUTZER_DELETE;
-import static de.htwberlin.mae.oauth2.OAuth2Configuration.PERMISSION_NUTZER_READ;
-import static de.htwberlin.mae.oauth2.OAuth2Configuration.PERMISSION_NUTZER_WRITE;
 
 /**
  * Created by fmielke on 29.06.16.
@@ -35,7 +35,21 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .antMatchers(HttpMethod.POST, "/api/nutzer/**").hasAuthority(PERMISSION_NUTZER_WRITE)
                 .antMatchers(HttpMethod.POST, "/api/**/**/nutzer/**").hasAuthority(PERMISSION_NUTZER_WRITE)
                 .antMatchers(HttpMethod.DELETE, "/api/nutzer/**").hasAuthority(PERMISSION_NUTZER_DELETE)
-        		.antMatchers(HttpMethod.DELETE, "/api/**/**/nutzer/**").hasAuthority(PERMISSION_NUTZER_DELETE);
+        		.antMatchers(HttpMethod.DELETE, "/api/**/**/nutzer/**").hasAuthority(PERMISSION_NUTZER_DELETE)
+        		
+        		.antMatchers(HttpMethod.GET, "/api/artikel/**").hasAuthority(PERMISSION_NUTZER_READ)
+                .antMatchers(HttpMethod.GET, "/api/**/**/artikel/**").hasAuthority(PERMISSION_NUTZER_READ)
+                .antMatchers(HttpMethod.POST, "/api/artikel/**").hasAuthority(PERMISSION_NUTZER_WRITE)
+                .antMatchers(HttpMethod.POST, "/api/**/**/artikel/**").hasAuthority(PERMISSION_NUTZER_WRITE)
+                .antMatchers(HttpMethod.DELETE, "/api/artikel/**").hasAuthority(PERMISSION_NUTZER_DELETE)
+        		.antMatchers(HttpMethod.DELETE, "/api/**/**/artikel/**").hasAuthority(PERMISSION_NUTZER_DELETE)
+        		
+        		.antMatchers(HttpMethod.GET, "/api/warenkorb/**").hasAuthority(PERMISSION_NUTZER_READ)
+                .antMatchers(HttpMethod.GET, "/api/**/**/warenkorb/**").hasAuthority(PERMISSION_NUTZER_READ)
+                .antMatchers(HttpMethod.POST, "/api/warenkorb/**").hasAuthority(PERMISSION_NUTZER_WRITE)
+                .antMatchers(HttpMethod.POST, "/api/**/**/warenkorb/**").hasAuthority(PERMISSION_NUTZER_WRITE)
+                .antMatchers(HttpMethod.DELETE, "/api/warenkorb/**").hasAuthority(PERMISSION_NUTZER_DELETE)
+        		.antMatchers(HttpMethod.DELETE, "/api/**/**/warenkorb/**").hasAuthority(PERMISSION_NUTZER_DELETE);
     }
 
 
