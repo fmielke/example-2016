@@ -9,7 +9,6 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.RestAssured.when;
 
 /**
@@ -19,7 +18,7 @@ import static com.jayway.restassured.RestAssured.when;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest("server.port:0")
-public class testRootAssured {
+public class RootTest {
 
     @Value("${local.server.port}")
     private int serverPort;
@@ -32,23 +31,9 @@ public class testRootAssured {
     @Test
     public void rootGetOk() {
         when()
-                .get("/api")
+                .get("/api/v1")
                 .then()
                 .log().all()
                 .statusCode(200);
-    }
-
-    @Test
-    public void nutzerPostCreated() {
-        given()
-                .contentType("application/json")
-                .body("{\"name\":\"john\"}")
-        .when()
-                .post("/api/nutzer")
-        .then()
-                .log().all()
-                .statusCode(401);
-         //       .header("location", containsString("/nutzer/"))
-         //       .body("name", equalTo("john"));
     }
 }
