@@ -39,7 +39,7 @@ public class Artikel {
 	private UUID artikelId;
 
 	@NotNull
-	@Size(min=5)
+	@Size(min=5, max=10, message="Produktcode muss zwischen 5 und 10 Zeichen enthalten und darf nicht leer sein.")
 	private String produktCode;
 	@NotNull
 	@Size(min=2, max=255)

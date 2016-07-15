@@ -33,7 +33,6 @@ public interface NutzerRepository extends PagingAndSortingRepository<Nutzer, UUI
 	 * Override default JPA Methods to enable Spring Caching
 	 */
 	
-	
 	@Override
 	@Cacheable(value = "nutzerCache")
 	Nutzer findOne(UUID id);

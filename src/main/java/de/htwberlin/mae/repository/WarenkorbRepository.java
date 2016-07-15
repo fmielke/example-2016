@@ -14,7 +14,7 @@ import de.htwberlin.mae.configuration.CustomRestMvcConfiguration;
 import de.htwberlin.mae.model.Warenkorb;
 
 @Transactional
-@RepositoryRestResource(collectionResourceRel = "warenkorb", path = "warenkorb")
+@RepositoryRestResource(collectionResourceRel = "warenkorbe", path = "warenkorbe")
 public interface WarenkorbRepository extends PagingAndSortingRepository<Warenkorb, UUID> {
 
 	/**

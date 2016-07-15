@@ -50,6 +50,7 @@ public class RestLimitInterceptor implements HandlerInterceptor {
 			}
 		}
 		else{
+			response.sendError(429, "Rate limit exceeded. Please Upgrade your Plan from Free to Pro.");
 			return false;
 		}
 	}
