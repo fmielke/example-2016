@@ -9,10 +9,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import static de.htwberlin.mae.security.OAuth2Configuration.PERMISSION_NUTZER_DELETE;
-import static de.htwberlin.mae.security.OAuth2Configuration.PERMISSION_NUTZER_READ;
-import static de.htwberlin.mae.security.OAuth2Configuration.PERMISSION_NUTZER_WRITE;
-
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -25,7 +21,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     @Bean
-    public AuthenticationManager    authenticationManagerBean() throws Exception {
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
@@ -45,16 +41,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("reader")
-                .password("reader")
-                .authorities(PERMISSION_NUTZER_READ)
+                .withUser("user")
+                .password("user")
+                .roles("USER")
                 .and()
-                .withUser("writer")
-                .password("writer")
-                .authorities(PERMISSION_NUTZER_WRITE)
-                .and()
-                .withUser("deleter")
-                .password("deleter")
-                .authorities(PERMISSION_NUTZER_DELETE);
+                .withUser("admin")
+                .password("admin")
+                .roles("ADMIN");
     }
 }

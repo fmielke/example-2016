@@ -34,6 +34,7 @@ public class JwtConfiguration {
 
     @Bean
     protected JwtAccessTokenConverter jwtTokenEnhancer() {
+        //TODO use heroku variable to set password for encryption
         log.info("Start jwt converter");
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "mySecretKey".toCharArray());
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();

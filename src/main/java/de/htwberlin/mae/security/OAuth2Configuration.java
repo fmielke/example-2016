@@ -24,9 +24,20 @@ import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFacto
 @EnableAuthorizationServer
 public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter{
 
-    public static final String PERMISSION_NUTZER_READ = "NUTZER_READ";
-    public static final String PERMISSION_NUTZER_WRITE = "NUTZER_WRITE";
-    public static final String PERMISSION_NUTZER_DELETE = "NUTZER_DELETE";
+    public static final String PERMISSION_NUTZER_READ = "nutzer.read";
+    public static final String PERMISSION_NUTZER_WRITE = "nutzer.write";
+    public static final String PERMISSION_NUTZER_DELETE = "nutzer.delete";
+    public static final String PERMISSION_NUTZER_ALL = "nutzer.all";
+
+    public static final String PERMISSION_ARTIKEL_READ = "artikel.read";
+    public static final String PERMISSION_ARTIKEL_WRITE = "artikel.write";
+    public static final String PERMISSION_ARTIKEL_DELETE = "artikel.delete";
+    public static final String PERMISSION_ARTIKEL_ALL = "artikel.all";
+
+    public static final String PERMISSION_WARENKORB_READ = "warenkorb.read";
+    public static final String PERMISSION_WARENKORB_WRITE = "warenkorb.write";
+    public static final String PERMISSION_WARENKORB_DELETE = "warenkorb.delete";
+    public static final String PERMISSION_WARENKORB_ALL = "warenkorb.all";
 
     Logger log = LoggerFactory.getLogger(OAuth2Configuration.class);
 
@@ -34,9 +45,20 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter{
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("api_client")
-                .scopes("CRM_SYSTEM")
+                .scopes(PERMISSION_ARTIKEL_READ, PERMISSION_WARENKORB_ALL)
                 .autoApprove(true)
-                .authorities(PERMISSION_NUTZER_READ, PERMISSION_NUTZER_WRITE, PERMISSION_NUTZER_DELETE)
+                .authorizedGrantTypes("implicit","refresh_token", "password", "authorization_code", "client_credentials")
+                .and()
+                .withClient("api_client_seller")
+                .scopes(PERMISSION_WARENKORB_READ, PERMISSION_ARTIKEL_ALL, PERMISSION_NUTZER_READ)
+                .autoApprove(true)
+                .authorities("ROLE_SELLER_CLIENT")
+                .authorizedGrantTypes("implicit","refresh_token", "password", "authorization_code", "client_credentials")
+                .and()
+                .withClient("api_client_admin")
+                .scopes(PERMISSION_NUTZER_ALL, PERMISSION_ARTIKEL_ALL, PERMISSION_WARENKORB_ALL)
+                .autoApprove(true)
+                .authorities("ROLE_ADMIN_CLIENT")
                 .authorizedGrantTypes("implicit","refresh_token", "password", "authorization_code", "client_credentials");
     }
 

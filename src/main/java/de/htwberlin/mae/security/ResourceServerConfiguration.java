@@ -1,9 +1,5 @@
 package de.htwberlin.mae.security;
 
-import static de.htwberlin.mae.security.OAuth2Configuration.PERMISSION_NUTZER_DELETE;
-import static de.htwberlin.mae.security.OAuth2Configuration.PERMISSION_NUTZER_READ;
-import static de.htwberlin.mae.security.OAuth2Configuration.PERMISSION_NUTZER_WRITE;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +11,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+
+import static de.htwberlin.mae.security.OAuth2Configuration.*;
 
 /**
  * Created by fmielke on 29.06.16.
@@ -28,30 +26,22 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/nutzer/**").hasAuthority(PERMISSION_NUTZER_READ)
-                .antMatchers(HttpMethod.GET, "/**/**/nutzer/**").hasAuthority(PERMISSION_NUTZER_READ)
-                .antMatchers(HttpMethod.POST, "/nutzer/**").hasAuthority(PERMISSION_NUTZER_WRITE)
-                .antMatchers(HttpMethod.POST, "/**/**/nutzer/**").hasAuthority(PERMISSION_NUTZER_WRITE)
-                .antMatchers(HttpMethod.DELETE, "/nutzer/**").hasAuthority(PERMISSION_NUTZER_DELETE)
-        		.antMatchers(HttpMethod.DELETE, "/**/**/nutzer/**").hasAuthority(PERMISSION_NUTZER_DELETE)
-        		
-        		.antMatchers(HttpMethod.GET, "/artikel/**").hasAuthority(PERMISSION_NUTZER_READ)
-                .antMatchers(HttpMethod.GET, "/**/**/artikel/**").hasAuthority(PERMISSION_NUTZER_READ)
-                .antMatchers(HttpMethod.POST, "/artikel/**").hasAuthority(PERMISSION_NUTZER_WRITE)
-                .antMatchers(HttpMethod.POST, "/**/**/artikel/**").hasAuthority(PERMISSION_NUTZER_WRITE)
-                .antMatchers(HttpMethod.DELETE, "/artikel/**").hasAuthority(PERMISSION_NUTZER_DELETE)
-        		.antMatchers(HttpMethod.DELETE, "/**/**/artikel/**").hasAuthority(PERMISSION_NUTZER_DELETE)
-        		
-        		.antMatchers(HttpMethod.GET, "/warenkorb/**").hasAuthority(PERMISSION_NUTZER_READ)
-                .antMatchers(HttpMethod.GET, "/**/**/warenkorb/**").hasAuthority(PERMISSION_NUTZER_READ)
-                .antMatchers(HttpMethod.POST, "/warenkorb/**").hasAuthority(PERMISSION_NUTZER_WRITE)
-                .antMatchers(HttpMethod.POST, "/**/**/warenkorb/**").hasAuthority(PERMISSION_NUTZER_WRITE)
-                .antMatchers(HttpMethod.DELETE, "/warenkorb/**").hasAuthority(PERMISSION_NUTZER_DELETE)
-        		.antMatchers(HttpMethod.DELETE, "/**/**/warenkorb/**").hasAuthority(PERMISSION_NUTZER_DELETE);
-    }
+                .regexMatchers(HttpMethod.GET, ".*nutzer.*").access("#oauth2.hasAnyScope('nutzer.read, nutzer.all')")
+                .regexMatchers(HttpMethod.POST, ".*nutzer.*").access("#oauth2.hasAnyScope('nutzer.write, nutzer.all')")
+                .regexMatchers(HttpMethod.PUT, ".*nutzer.*").access("#oauth2.hasAnyScope('nutzer.write, nutzer.all')")
+                .regexMatchers(HttpMethod.DELETE, ".*nutzer.*").access("#oauth2.hasAnyScope('nutzer.delete, nutzer.all')")
 
+                .regexMatchers(HttpMethod.GET, ".*artikel.*").access("#oauth2.hasAnyScope('artikel.read, artikel.all')")
+                .regexMatchers(HttpMethod.POST, ".*artikel.*").access("#oauth2.hasAnyScope('artikel.write, artikel.all')")
+                .regexMatchers(HttpMethod.PUT, ".*artikel.*").access("#oauth2.hasAnyScope('artikel.write, artikel.all')")
+                .regexMatchers(HttpMethod.DELETE, ".*artikel.*").access("#oauth2.hasAnyScope('artikel.delete, artikel.all')")
+
+                .regexMatchers(HttpMethod.GET, ".*warenkorb.*").access("#oauth2.hasAnyScope('warenkorb.read, warenkorb.all')")
+                .regexMatchers(HttpMethod.POST, ".*warenkorb.*").access("#oauth2.hasAnyScope('warenkorb.write, warenkorb.all')")
+                .regexMatchers(HttpMethod.PUT, ".*warenkorb.*").access("#oauth2.hasAnyScope('warenkorb.write, warenkorb.all')")
+                .regexMatchers(HttpMethod.DELETE, ".*warenkorb.*").access("#oauth2.hasAnyScope('warenkorb.delete, warenkorb.all')");
+    }
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
