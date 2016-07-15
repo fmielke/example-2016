@@ -158,6 +158,9 @@
 						</goals>
 						<configuration>
 							<skipTests>false</skipTests>
+							<includes>
+								<include>**/*.class</include>
+							</includes>
 						</configuration>
 					</execution>
 				</executions>
