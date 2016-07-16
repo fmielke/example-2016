@@ -30,7 +30,7 @@ public class healthTest {
     }
 
     @Test
-    public void rootGetOk() {
+    public void healthGetOk() {
         when()
                 .get("/health")
         .then()
