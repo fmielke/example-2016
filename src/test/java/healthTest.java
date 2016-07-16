@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import static com.jayway.restassured.RestAssured.when;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Created by fmielke on 10.06.16.
@@ -18,7 +19,7 @@ import static com.jayway.restassured.RestAssured.when;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest("server.port:0")
-public class RootTest {
+public class healthTest {
 
     @Value("${local.server.port}")
     private int serverPort;
@@ -31,9 +32,10 @@ public class RootTest {
     @Test
     public void rootGetOk() {
         when()
-                .get("/api/v1")
-                .then()
+                .get("/health")
+        .then()
                 .log().all()
+                .body("status", equalTo("UP"))
                 .statusCode(200);
     }
 }
