@@ -34,7 +34,7 @@ public class DatabasePreparationBean implements CommandLineRunner {
 	@Autowired
 	private WarenkorbRepository warenkorbRepository;
 
-    private static Logger log = LogManager.getRootLogger();
+    Logger log = LogManager.getRootLogger();
 
 	public void run(String... args) {
         try {

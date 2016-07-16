@@ -5,8 +5,8 @@
 package de.htwberlin.mae.interceptor;
 
 import de.htwberlin.mae.security.RestLimitServiceImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,7 +19,7 @@ import java.net.URISyntaxException;
 @Component
 public class RestLimitInterceptor implements HandlerInterceptor {
 
-	Logger log = LoggerFactory.getLogger(RestLimitInterceptor.class);
+	Logger log = LogManager.getRootLogger();
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException, URISyntaxException  {
@@ -39,7 +39,7 @@ public class RestLimitInterceptor implements HandlerInterceptor {
 				return true;
 			}
 			else{
-				log.warn("client with payload " +key +" reached rate limit");
+				log.warn("client with key " +key +" reached rate limit");
 				response.sendError(429, "Rate limit exceeded. Please Upgrade your Plan from Free to Pro.");
 				return false;
 			}

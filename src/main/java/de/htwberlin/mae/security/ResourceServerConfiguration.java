@@ -1,7 +1,7 @@
 package de.htwberlin.mae.security;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,8 +12,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
-import static de.htwberlin.mae.security.OAuth2Configuration.*;
-
 /**
  * Created by fmielke on 29.06.16.
  */
@@ -21,7 +19,7 @@ import static de.htwberlin.mae.security.OAuth2Configuration.*;
 @EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-    Logger log = LoggerFactory.getLogger(ResourceServerConfiguration.class);
+    Logger log = LogManager.getRootLogger();
 
     @Override
     public void configure(HttpSecurity http) throws Exception {

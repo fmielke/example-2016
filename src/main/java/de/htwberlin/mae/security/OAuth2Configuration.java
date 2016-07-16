@@ -1,7 +1,7 @@
 package de.htwberlin.mae.security;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,7 +40,7 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter{
     public static final String PERMISSION_WARENKORB_DELETE = "warenkorb.delete";
     public static final String PERMISSION_WARENKORB_ALL = "warenkorb.all";
 
-    Logger log = LoggerFactory.getLogger(OAuth2Configuration.class);
+    Logger log = LogManager.getRootLogger();
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {

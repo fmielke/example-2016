@@ -1,7 +1,7 @@
 package de.htwberlin.mae.security;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 @Configuration
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    Logger log = LoggerFactory.getLogger(WebSecurityConfiguration.class);
+    Logger log = LogManager.getRootLogger();
 
     @Override
     @Bean
