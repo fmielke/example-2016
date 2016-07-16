@@ -24,11 +24,14 @@ public class RestLimitInterceptor implements HandlerInterceptor {
 
 	@Value("${logentries.token}")
 	private String logentriesToken;
+
+	@Value("${jwt.secret}")
+	private String jwtSecret;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException, URISyntaxException  {
 
-		log.info("requested uri is :" +request.getRequestURI() + " and logentries token is " +logentriesToken);
+		log.info("requested uri is :" +request.getRequestURI() + " and logentries token is " +logentriesToken +" and jwt token is " +jwtSecret);
 
 		//use this to enable hal browser
 		if(request.getRequestURI().contains("/browser/")){
