@@ -25,7 +25,7 @@ common: &default_settings
   # For example, to report data to "My Application" and "My Application 2" use this:
   # app_name: My Application;My Application 2
   # This setting is required.
-  app_name: example-2016-dev
+  app_name: example-2016-dev;example-2016-staging;example-2016
 
   # To enable high security, set this property to true. When in high
   # security mode, the agent will use SSL and obfuscated SQL. Additionally,
@@ -51,12 +51,12 @@ common: &default_settings
   # The levels in increasing order of verboseness are:
   #   off, severe, warning, info, fine, finer, finest
   # Default is info.
-  log_level: finest
+  log_level: info
 
   # Log all data sent to and from New Relic in plain text.
   # This setting is dynamic, so changes do not require restarting your application.
   # Default is false.
-  audit_mode: true
+  audit_mode: false
 
   # The number of backup log files to save.
   # Default is 1.
