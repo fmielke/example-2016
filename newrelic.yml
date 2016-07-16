@@ -51,7 +51,7 @@ common: &default_settings
   # The levels in increasing order of verboseness are:
   #   off, severe, warning, info, fine, finer, finest
   # Default is info.
-  log_level: info
+  log_level: finest
 
   # Log all data sent to and from New Relic in plain text.
   # This setting is dynamic, so changes do not require restarting your application.
@@ -69,7 +69,7 @@ common: &default_settings
 
   # Override other log rolling configuration and roll the logs daily.
   # Default is false.
-  log_daily: false
+  log_daily: true
 
   # The name of the log file.
   # Default is newrelic_agent.log.
