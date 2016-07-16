@@ -6,7 +6,6 @@ package de.htwberlin.mae.interceptor;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +37,7 @@ public class RestLimitInterceptor implements HandlerInterceptor {
 		if(request.getHeader("Authorization") != null){
 			String key = (request.getHeader("Authorization").contains("Bearer")) ? request.getHeader("Authorization").split("\\.")[1] : "noauth";
 			//log.info("KEY: " +  key);
-			//check if user does not exceeds limits of 20 per minute
+			//check if user does not exceeds limits of X per minute
 			RestLimitServiceImpl restLimitService = new RestLimitServiceImpl();
 			restLimitService.incrementUsage(key, request);
 			if(restLimitService.isValid(request.getMethod())){
@@ -50,8 +49,10 @@ public class RestLimitInterceptor implements HandlerInterceptor {
 			}
 		}
 		else{
-			response.sendError(429, "Rate limit exceeded. Please Upgrade your Plan from Free to Pro.");
-			return false;
+			return true;
+			
+			//response.sendError(429, "Rate limit exceeded. Please Upgrade your Plan from Free to Pro.");
+			//return false;
 		}
 	}
 	
