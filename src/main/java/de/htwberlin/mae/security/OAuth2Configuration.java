@@ -65,7 +65,7 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter{
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        //endpoints.pathMapping("/oauth/token", "/api/v1/oauth/token");
+        //TODO endpoints.pathMapping("/oauth/token", "/api/v1/oauth/token");
         endpoints.tokenStore(tokenStore()).tokenEnhancer(jwtTokenEnhancer()).authenticationManager(authenticationManager);
     }
 
@@ -84,7 +84,6 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter{
 
     @Bean
     protected JwtAccessTokenConverter jwtTokenEnhancer() {
-        //TODO use heroku variable to set password for encryption
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), jwtSecret.toCharArray());
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setKeyPair(keyStoreKeyFactory.getKeyPair("jwt"));
