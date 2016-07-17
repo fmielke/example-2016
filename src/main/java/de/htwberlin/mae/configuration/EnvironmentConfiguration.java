@@ -23,6 +23,8 @@ public class EnvironmentConfiguration {
     		props.setProperty("ENV_SYSTEM", "local");
     		System.out.println("ENV_SYSTEM: " + System.getProperty("ENV_SYSTEM"));
             log.info("ENV_SYSTEM: {}", System.getProperty("ENV_SYSTEM"));
+			log.info("LOGENTRIES_TOKEN: {}",System.getenv().get("LOGENTRIES_TOKEN"));
+			log.info("JWT_SECRET: {}",System.getenv().get("JWT_SECRET"));
     	}
     	else {
     		System.out.println("ENV_SYSTEM: " + System.getenv("ENV_SYSTEM"));
