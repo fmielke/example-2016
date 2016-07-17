@@ -2,7 +2,6 @@ package de.htwberlin.mae.repository;
 
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 
@@ -23,7 +22,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.transaction.annotation.Transactional;
 
-import de.htwberlin.mae.configuration.RestConfiguration;
 import de.htwberlin.mae.model.Nutzer;
 
 @Transactional
@@ -60,7 +58,7 @@ public interface NutzerRepository extends PagingAndSortingRepository<Nutzer, UUI
 	void delete(UUID id);
 	
 	//restresources found under /nutzer/search/...
-	@RestResource(path = "names", rel = "names")
+	@RestResource(path = "name", rel = "name")
 	List<Nutzer> findByName(@Param("name") String name);
 	
 	@RestResource(path = "ids", rel = "ids")
