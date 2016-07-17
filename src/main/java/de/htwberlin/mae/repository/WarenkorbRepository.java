@@ -47,5 +47,8 @@ public interface WarenkorbRepository extends PagingAndSortingRepository<Warenkor
 	
 	
 	@RestResource(path="anzahl", rel="anzahl")
-	public List<Warenkorb> findByAnzahl(@Param("anzahl") Integer anzahl);
+	public List<Warenkorb> findByAnzahl(@Param("value") Integer anzahl);
+	
+	@RestResource(path="anzahl-higher", rel="anzahl-higher")
+	public List<Warenkorb> findByAnzahlGreaterThan(@Param("value") Integer anzahl);
 }

@@ -71,11 +71,11 @@ public class DatabasePreparationBean implements CommandLineRunner {
             
             ArrayList<Warenkorb> warenkorbs = new ArrayList<Warenkorb>();
             
-            warenkorbs.add(new Warenkorb(nutzerRepository.findByName("Marcus Schindler").get(0), artikelRepository.findByBezeichnung("Bier").get(0), 5));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findByName("Florian Heilscher").get(0), artikelRepository.findByBezeichnung("Bier").get(0), 1));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findByName("Fabian Mielke").get(0), artikelRepository.findByBezeichnung("Bier").get(0), 2));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findByName("Aristide Defo").get(0), artikelRepository.findByBezeichnung("Bier").get(0), 4));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findByName("Marcus Schindler").get(0), artikelRepository.findByBezeichnung("Bier").get(0), 3));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findByNameContainingIgnoreCase("Marcus Schindler").get(0), artikelRepository.findByBezeichnungIgnoreCase("Bier").get(0), 5));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findByNameContainingIgnoreCase("Florian Heilscher").get(0), artikelRepository.findByBezeichnungIgnoreCase("Bier").get(0), 1));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findByNameContainingIgnoreCase("Fabian Mielke").get(0), artikelRepository.findByBezeichnungIgnoreCase("Bier").get(0), 2));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findByNameContainingIgnoreCase("Aristide Defo").get(0), artikelRepository.findByBezeichnungIgnoreCase("Bier").get(0), 4));
+            warenkorbs.add(new Warenkorb(nutzerRepository.findByNameContainingIgnoreCase("Marcus Schindler").get(0), artikelRepository.findByBezeichnungIgnoreCase("Bier").get(0), 3));
             
             warenkorbRepository.save(warenkorbs);
             log.info("db initial setup ends");

@@ -52,8 +52,17 @@ public interface ArtikelRepository extends PagingAndSortingRepository<Artikel, U
 	 * adding custom search methods -> under /search resource
 	 */
 	@RestResource(path="bezeichnung", rel="bezeichnung")
-	public List<Artikel> findByBezeichnung(@Param("bezeichnung") String bezeichnung);
+	public List<Artikel> findByBezeichnungIgnoreCase(@Param("value") String bezeichnung);
 	
 	@RestResource(path="preis", rel="preis")
-	public List<Artikel> findByPreis(@Param("preis") Double preis);
+	public List<Artikel> findByPreis(@Param("value") Double preis);
+	
+	@RestResource(path="preis-between", rel="preis-between")
+	public List<Artikel> findByPreisBetween(@Param("min") Double preismin, @Param("max") Double preismax);
+	
+	@RestResource(path="preis-higher", rel="preis-higher")
+	public List<Artikel> findByPreisGreaterThan(@Param("value") Double preis);
+	
+	@RestResource(path="preis-lesser", rel="preis-lesser")
+	public List<Artikel> findByPreisLessThan(@Param("value") Double preis);
 }

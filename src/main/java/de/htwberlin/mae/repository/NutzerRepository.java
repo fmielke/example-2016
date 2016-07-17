@@ -57,9 +57,10 @@ public interface NutzerRepository extends PagingAndSortingRepository<Nutzer, UUI
 	@CacheEvict(value = "nutzerCache", allEntries=true)
 	void delete(UUID id);
 	
+	
 	//restresources found under /nutzer/search/...
 	@RestResource(path = "name", rel = "name")
-	List<Nutzer> findByName(@Param("name") String name);
+	List<Nutzer> findByNameContainingIgnoreCase(@Param("name") String name);
 	
 	@RestResource(path = "ids", rel = "ids")
 	@Query("SELECT nutzerId, name FROM Nutzer n WHERE n.nutzerId IN :ids")
