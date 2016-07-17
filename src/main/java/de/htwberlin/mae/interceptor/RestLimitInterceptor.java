@@ -5,10 +5,10 @@
 package de.htwberlin.mae.interceptor;
 
 import de.htwberlin.mae.security.RestLimitServiceImpl;
-import net.gpedro.integrations.slack.SlackApi;
-import net.gpedro.integrations.slack.SlackMessage;
+import de.htwberlin.mae.slackapi.SlackWebhookImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -21,7 +21,6 @@ import java.net.URISyntaxException;
 
 @Component
 public class RestLimitInterceptor implements HandlerInterceptor {
-
 	Logger log = LogManager.getRootLogger();
 
 	@Value("${jwt.secret}")
@@ -52,12 +51,9 @@ public class RestLimitInterceptor implements HandlerInterceptor {
 			}
 			else{
 				log.warn("client with key " +key +" reached rate limit");
-				SlackApi api = new SlackApi("https://hooks.slack.com/services/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");
-				SlackMessage slackMessage = new SlackMessage();
-				slackMessage.setIcon(":trollface:");
-				slackMessage.setUsername("interceptor");
-				slackMessage.setText("client with key '" +key +"' reached rate limit");
-				api.call(slackMessage);
+				SlackWebhookImpl webhook = new SlackWebhookImpl();
+				webhook.createSlackMessage(":trollface:", "interceptor", "client with key '" +key +"' reached rate limit");
+				webhook.sendRestLimitHook();
 				response.sendError(429, "Rate limit exceeded. Please Upgrade your Plan from Free to Pro.");
 				return false;
 			}

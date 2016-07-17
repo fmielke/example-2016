@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import de.htwberlin.mae.model.Artikel;
@@ -45,13 +46,13 @@ public class ArtikelBulkController {
 	public @ResponseBody ResponseEntity<ArrayList<Resource<Artikel>>> saveBulkArtikel(@RequestBody List<Artikel> newArtikel, Pageable pageable) throws URISyntaxException {
 
 		ArrayList<Resource<Artikel>> addedArtikel = new ArrayList<Resource<Artikel>>();
-		//Set<Long> set = new HashSet<Long>();
 		
 		for(Artikel artikel : newArtikel) {
 			Resource<Artikel> ar = new Resource<Artikel>(this.artikelRepository.save(artikel));
 			ar.add(linkTo(methodOn(ArtikelBulkController.class).saveBulkArtikel(newArtikel, pageable)).withSelfRel());
 			addedArtikel.add(ar);
 		}
+		
 		
 		//Resources<Artikel> resources = new Resources<Artikel>(newArtikel); 
         //resources.add(linkTo(methodOn(ArtikelBulkController.class).saveBulkArtikel(newArtikel, pageable)).withSelfRel()); 
