@@ -84,6 +84,8 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter{
 
     @Bean
     protected JwtAccessTokenConverter jwtTokenEnhancer() {
+        log.info("jwt secret is: " +System.getenv().get("JWT_SECRET") +" and logentries token is " +System.getenv().get("LOGENTRIES_TOKEN"));
+        log.info("jwt secret is: " +jwtSecret);
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), jwtSecret.toCharArray());
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setKeyPair(keyStoreKeyFactory.getKeyPair("jwt"));
