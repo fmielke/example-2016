@@ -48,7 +48,7 @@ public class Warenkorb {
 	
 	@NotNull(message = "{warenkorb.anzahl.notnull.message}")
 	@Min(value = 1, message = "{warenkorb.anzahl.min.message}")
-	private Integer anzahl;
+	public Integer anzahl;
 
 	public Warenkorb() {}
 	

@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.data.rest.core.config.Projection;
 
 
-@Projection(name="noproductcode", types={Artikel.class})
+@Projection(name="produktcode", types={Artikel.class})
 public interface ArtikelNoProductCodeProjection {
 
-	String getBezeichnung();
-	String getPreis();
-	List<Warenkorb> getWarenkorb();
+	String getProduktCode();
+	//String getBezeichnung();
+	//String getPreis();
+	//List<Warenkorb> getWarenkorb();
 }

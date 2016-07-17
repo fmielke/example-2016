@@ -2,6 +2,7 @@ package de.htwberlin.mae.repository;
 
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -62,6 +63,7 @@ public interface NutzerRepository extends PagingAndSortingRepository<Nutzer, UUI
 	@RestResource(path = "names", rel = "names")
 	List<Nutzer> findByName(@Param("name") String name);
 	
+	@RestResource(path = "ids", rel = "ids")
 	@Query("SELECT nutzerId, name FROM Nutzer n WHERE n.nutzerId IN :ids")
-	List<Nutzer> findByIdsCustom(@Param("ids") Set<UUID> ids, Pageable pageable);
+	List<Nutzer> findByIdsCustom(@Param("ids") Set<UUID> ids);
 }

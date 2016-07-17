@@ -31,15 +31,7 @@ public class RestLimitInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException, URISyntaxException  {
 
-		log.info("jwt secret is: "
-				+System.getenv().get("JWT_SECRET")
-				+" jwt secret from Value annotation is "
-				+jwtSecret
-				+" and logentries token is "
-				+System.getenv().get("LOGENTRIES_TOKEN")
-				+" and logentries token from Value annotation is "
-				+logentriesToken);
-
+		
 		//TODO das müsste eigentlich irgendwie anders gelöst werden.
 		//use this to enable hal browser
 		if(request.getRequestURI().contains("/browser/")){
