@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
@@ -38,13 +37,16 @@ public class Artikel {
 	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
 	private UUID artikelId;
 
-	@NotNull
-	@Size(min=5, max=10, message="Produktcode muss zwischen 5 und 10 Zeichen enthalten und darf nicht leer sein.")
+	@NotNull(message = "{artikel.produktCode.notnull.message}")
+	@Size(min=5, max=10, message="{artikel.produktCode.minmax.message}")
 	private String produktCode;
-	@NotNull
-	@Size(min=2, max=255)
+	
+	@NotNull(message = "{artikel.bezeichnung.notnull.message}")
+	@Size(min=2, max=255, message="{artikel.bezeichnung.minmax.message}")
 	private String bezeichnung;
-	@Min(0)
+	
+	@NotNull(message = "{artikel.preis.notnull.message}")
+	@Min(value = 0, message="{artikel.preis.min.message}")
 	private Double preis;
 	
 	@OneToMany(mappedBy = "artikel", fetch = FetchType.EAGER)

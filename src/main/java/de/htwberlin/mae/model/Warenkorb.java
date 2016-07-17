@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -47,8 +46,8 @@ public class Warenkorb {
 	@JoinColumn(name = "nutzer_id")
 	private Nutzer nutzer;
 	
-	@NotNull
-	@Min(1)
+	@NotNull(message = "{warenkorb.anzahl.notnull.message}")
+	@Min(value = 1, message = "{warenkorb.anzahl.min.message}")
 	private Integer anzahl;
 
 	public Warenkorb() {}

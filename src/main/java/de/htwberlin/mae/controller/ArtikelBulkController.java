@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +25,9 @@ import de.htwberlin.mae.model.Artikel;
 import de.htwberlin.mae.repository.ArtikelRepository;
 
 
-@RepositoryRestResource
+@RepositoryRestController
 public class ArtikelBulkController {
 
-	@Autowired
 	private ArtikelRepository artikelRepository;
 	
 	

@@ -40,10 +40,12 @@ public class RestLimitInterceptor implements HandlerInterceptor {
 				+" and logentries token from Value annotation is "
 				+logentriesToken);
 
+		//TODO das müsste eigentlich irgendwie anders gelöst werden.
 		//use this to enable hal browser
 		if(request.getRequestURI().contains("/browser/")){
 			return true;
 		}
+		
 		
 		if(request.getHeader("Authorization") != null){
 			String key = (request.getHeader("Authorization").contains("Bearer")) ? request.getHeader("Authorization").split("\\.")[1] : "noauth";
@@ -61,10 +63,8 @@ public class RestLimitInterceptor implements HandlerInterceptor {
 			}
 		}
 		else{
+			//wenn Header keine auth hat wird von Spring Security geblockt...
 			return true;
-			
-			//response.sendError(429, "Rate limit exceeded. Please Upgrade your Plan from Free to Pro.");
-			//return false;
 		}
 	}
 	

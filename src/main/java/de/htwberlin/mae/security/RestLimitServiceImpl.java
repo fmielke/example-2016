@@ -36,6 +36,7 @@ public class RestLimitServiceImpl implements RestLimitService{
 		
 		//redisTemplate.opsForValue().increment(key, 1);
 		//redisTemplate.opsForValue().getOperations().expire(key, 60, TimeUnit.SECONDS);
+		
 		Jedis jedis = RedisConnectionMananger.getConnection();
 		usage = jedis.incr(key);
 		jedis.expire(key, 60);

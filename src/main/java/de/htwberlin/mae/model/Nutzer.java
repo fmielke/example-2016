@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
@@ -37,8 +36,8 @@ public class Nutzer {
 	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
 	private UUID nutzerId;
 
-	@NotNull
-	@Size(min=2, max=255)
+	@NotNull(message = "{nutzer.name.notnull.message}")
+	@Size(min=2, max=255, message = "{nutzer.name.minmax.message}")
 	private String name;
 	
 	@OneToMany(mappedBy = "nutzer", fetch = FetchType.EAGER)

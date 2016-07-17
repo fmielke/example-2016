@@ -10,7 +10,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.transaction.annotation.Transactional;
 
-import de.htwberlin.mae.configuration.CustomRestMvcConfiguration;
+import de.htwberlin.mae.configuration.RestConfiguration;
 import de.htwberlin.mae.model.Warenkorb;
 
 @Transactional
