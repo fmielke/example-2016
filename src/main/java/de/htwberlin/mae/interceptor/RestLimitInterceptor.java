@@ -7,6 +7,7 @@ package de.htwberlin.mae.interceptor;
 import de.htwberlin.mae.security.RestLimitServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,11 +21,24 @@ import java.net.URISyntaxException;
 public class RestLimitInterceptor implements HandlerInterceptor {
 
 	Logger log = LogManager.getRootLogger();
-	
+
+	@Value("${jwt.secret}")
+	private String jwtSecret;
+
+	@Value("${logentries.token}")
+	private String logentriesToken;
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException, URISyntaxException  {
 
-		log.info("jwt secret is: " +System.getenv().get("JWT_SECRET") +" and logentries token is " +System.getenv().get("LOGENTRIES_TOKEN"));
+		log.info("jwt secret is: "
+				+System.getenv().get("JWT_SECRET")
+				+" jwt secret from Value annotation is "
+				+jwtSecret
+				+" and logentries token is "
+				+System.getenv().get("LOGENTRIES_TOKEN")
+				+" and logentries token from Value annotation is "
+				+logentriesToken);
 
 		//use this to enable hal browser
 		if(request.getRequestURI().contains("/browser/")){
