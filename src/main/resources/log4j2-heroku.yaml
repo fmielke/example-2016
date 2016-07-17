@@ -16,7 +16,7 @@ Configuration:
           size: 10 MB
     Logentries:
       name: le-heroku
-      token: b3f261fa-05ac-4ca4-8aa9-45b8039a3edb
+      token: "${LOGENTRIES_TOKEN}"
       Patternlayout:
         pattern: "%d{ISO8601} %-5p [%c{3}] [%t] %m%n"
   Loggers:
