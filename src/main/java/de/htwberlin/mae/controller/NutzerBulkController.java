@@ -20,19 +20,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import de.htwberlin.mae.model.Nutzer;
-import de.htwberlin.mae.repository.NutzerRepository;
+import de.htwberlin.mae.model.Customer;
+import de.htwberlin.mae.repository.CustomerRepository;
 
 //TODO es sollte eigenlich mit repositoryrestcontroller funktionieren
 @RepositoryRestController
 public class NutzerBulkController {
 	
 	@Autowired
-	private NutzerRepository nutzerRepository;
+	private CustomerRepository nutzerRepository;
 	
 	
 	@Autowired
-	public NutzerBulkController(NutzerRepository nutzerRepository) {
+	public NutzerBulkController(CustomerRepository nutzerRepository) {
 		this.nutzerRepository = nutzerRepository;
 	}
 	
@@ -42,15 +42,15 @@ public class NutzerBulkController {
 			value = "/nutzer/bulk",
 			method = RequestMethod.POST
 			)
-	public @ResponseBody ResponseEntity<ArrayList<Resource<Nutzer>>> saveBulkNutzer(@RequestBody List<Nutzer> newNutzer, Pageable pageable) throws URISyntaxException {
+	public @ResponseBody ResponseEntity<ArrayList<Resource<Customer>>> saveBulkNutzer(@RequestBody List<Customer> newNutzer, Pageable pageable) throws URISyntaxException {
 
-		ArrayList<Nutzer> nutzerAdded = new ArrayList<Nutzer>();
+		ArrayList<Customer> nutzerAdded = new ArrayList<Customer>();
 		
-		ArrayList<Resource<Nutzer>> addedNutzer = new ArrayList<Resource<Nutzer>>();
+		ArrayList<Resource<Customer>> addedNutzer = new ArrayList<Resource<Customer>>();
 		//Set<Long> set = new HashSet<Long>();
 		
-		for(Nutzer nutzer : newNutzer) {
-			Resource<Nutzer> an = new Resource<Nutzer>(this.nutzerRepository.save(nutzer));
+		for(Customer nutzer : newNutzer) {
+			Resource<Customer> an = new Resource<Customer>(this.nutzerRepository.save(nutzer));
 			an.add(linkTo(methodOn(NutzerBulkController.class).saveBulkNutzer(newNutzer, pageable)).withSelfRel());
 			addedNutzer.add(an);
 		}
@@ -60,7 +60,7 @@ public class NutzerBulkController {
 		//System.out.println("Nutzerpagesize: " + nutzerPage.size());
 		//nutzerPage.forEach((n) -> {System.out.println("Nutzer: " + n.getName());});
 		
-		Resources<Nutzer> resources = new Resources<Nutzer>(nutzerAdded); 
+		Resources<Customer> resources = new Resources<Customer>(nutzerAdded); 
         resources.add(linkTo(methodOn(NutzerBulkController.class).saveBulkNutzer(nutzerAdded, pageable)).withSelfRel()); 
 
         // add other links as needed

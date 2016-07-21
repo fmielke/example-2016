@@ -11,12 +11,6 @@ public class SlackWebhookImpl implements SlackWebhook{
 	private SlackApi api = new SlackApi("https://hooks.slack.com/services/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");
 	private SlackMessage message;
 	
-	/*	
-	private SlackApi createSlackApi() {
-		SlackApi api = new SlackApi("https://hooks.slack.com/services/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");
-		return api;
-	}
-*/
 	@Override
 	public void createSlackMessage(String icon, String username, String text) {
 		SlackMessage slackMessage = new SlackMessage();

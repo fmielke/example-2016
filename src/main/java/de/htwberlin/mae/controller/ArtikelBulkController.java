@@ -22,19 +22,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import de.htwberlin.mae.model.Artikel;
-import de.htwberlin.mae.repository.ArtikelRepository;
+import de.htwberlin.mae.model.Article;
+import de.htwberlin.mae.repository.ArticleRepository;
 
 
 @RepositoryRestController
 public class ArtikelBulkController {
 
-	private ArtikelRepository artikelRepository;
+	private ArticleRepository articleRepository;
 	
 	
 	@Autowired
-	public ArtikelBulkController(ArtikelRepository artikelRepository) {
-		this.artikelRepository = artikelRepository;
+	public ArtikelBulkController(ArticleRepository articleRepository) {
+		this.articleRepository = articleRepository;
 	}
 	
 	
@@ -43,14 +43,14 @@ public class ArtikelBulkController {
 			value = "/artikel/bulk",
 			method = RequestMethod.POST
 			)
-	public @ResponseBody ResponseEntity<ArrayList<Resource<Artikel>>> saveBulkArtikel(@RequestBody List<Artikel> newArtikel, Pageable pageable) throws URISyntaxException {
+	public @ResponseBody ResponseEntity<ArrayList<Resource<Article>>> saveBulkArtikel(@RequestBody List<Article> newArticle, Pageable pageable) throws URISyntaxException {
 
-		ArrayList<Resource<Artikel>> addedArtikel = new ArrayList<Resource<Artikel>>();
+		ArrayList<Resource<Article>> addedArticles = new ArrayList<Resource<Article>>();
 		
-		for(Artikel artikel : newArtikel) {
-			Resource<Artikel> ar = new Resource<Artikel>(this.artikelRepository.save(artikel));
-			ar.add(linkTo(methodOn(ArtikelBulkController.class).saveBulkArtikel(newArtikel, pageable)).withSelfRel());
-			addedArtikel.add(ar);
+		for(Article article : newArticle) {
+			Resource<Article> ar = new Resource<Article>(this.articleRepository.save(article));
+			ar.add(linkTo(methodOn(ArtikelBulkController.class).saveBulkArtikel(newArticle, pageable)).withSelfRel());
+			addedArticles.add(ar);
 		}
 		
 		
@@ -58,7 +58,7 @@ public class ArtikelBulkController {
         //resources.add(linkTo(methodOn(ArtikelBulkController.class).saveBulkArtikel(newArtikel, pageable)).withSelfRel()); 
 
         // add other links as needed
-        URI location = new URI("api/artikel");
-        return ResponseEntity.created(location).header("MyResponseHeader", "MyValue").body(addedArtikel);
+        URI location = new URI("api/article");
+        return ResponseEntity.created(location).header("MyResponseHeader", "MyValue").body(addedArticles);
 	}
 }

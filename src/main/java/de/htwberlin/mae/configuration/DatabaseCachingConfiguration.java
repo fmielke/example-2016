@@ -19,15 +19,15 @@ class DatabaseCachingConfiguration {
 	@Bean
 	public CacheManager cacheManager() {
 
-		Cache artikelCache = new ConcurrentMapCache("artikelCache");
-		Cache nutzerCache = new ConcurrentMapCache("nutzerCache");
-		Cache warenkorbCache = new ConcurrentMapCache("warenkorbCache");
+		Cache articleCache = new ConcurrentMapCache("articleCache");
+		Cache customerCache = new ConcurrentMapCache("customerCache");
+		Cache cartCache = new ConcurrentMapCache("cartCache");
 
 		SimpleCacheManager manager = new SimpleCacheManager();
 		manager.setCaches(Arrays.asList(
-				artikelCache, 
-				nutzerCache,
-				warenkorbCache
+				articleCache, 
+				customerCache,
+				cartCache
 				));
 
 		return manager;

@@ -17,12 +17,14 @@ public class RestValidationConfiguration extends RepositoryRestConfigurerAdapter
 		return new LocalValidatorFactoryBean();
 	}
 
-	//validating repositories
+	// validating repositories
 	@Override
 	public void configureValidatingRepositoryEventListener(ValidatingRepositoryEventListener validatingListener) {
-		Validator validator = validator();
+
 		// bean validation always before save and create
-		validatingListener.addValidator("beforeCreate", validator);
-		validatingListener.addValidator("beforeSave", validator);
+		validatingListener.addValidator("afterCreate", validator());
+		validatingListener.addValidator("beforeCreate", validator());
+		validatingListener.addValidator("afterSave", validator());
+		validatingListener.addValidator("beforeSave", validator());
 	}
 }

@@ -8,8 +8,8 @@ import de.htwberlin.mae.security.RestLimitServiceImpl;
 import de.htwberlin.mae.slackapi.SlackWebhookImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,6 +28,8 @@ public class RestLimitInterceptor implements HandlerInterceptor {
 
 	@Value("${logentries.token}")
 	private String logentriesToken;
+	
+	private String rateLimitExceededMessage = "Rate limit exceeded. Please Upgrade your Plan from Free to Pro.";
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException, URISyntaxException  {
@@ -42,19 +44,17 @@ public class RestLimitInterceptor implements HandlerInterceptor {
 		
 		if(request.getHeader("Authorization") != null){
 			String key = (request.getHeader("Authorization").contains("Bearer")) ? request.getHeader("Authorization").split("\\.")[1] : "noauth";
-			//log.info("KEY: " +  key);
-			//check if user does not exceeds limits of X per minute
 			RestLimitServiceImpl restLimitService = new RestLimitServiceImpl();
 			restLimitService.incrementUsage(key, request);
 			if(restLimitService.isValid(request.getMethod())){
 				return true;
 			}
 			else{
-				log.warn("client with key " +key +" reached rate limit");
+				//log.warn("client with key " +key +" reached rate limit");
 				SlackWebhookImpl webhook = new SlackWebhookImpl();
 				webhook.createSlackMessage(":trollface:", "interceptor", "client with key '" +key +"' reached rate limit");
 				webhook.sendRestLimitHook();
-				response.sendError(429, "Rate limit exceeded. Please Upgrade your Plan from Free to Pro.");
+				response.sendError(429, rateLimitExceededMessage);
 				return false;
 			}
 		}

@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Nutzer {
+public class Customer {
 	
 	@Version // generates E-TAG Header
 	private Long version;
@@ -34,18 +34,18 @@ public class Nutzer {
 	@Id
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
-	private UUID nutzerId;
+	private UUID customerId;
 
 	@NotNull(message = "{nutzer.name.notnull.message}")
 	@Size(min=2, max=255, message = "{nutzer.name.minmax.message}")
 	private String name;
 	
-	@OneToMany(mappedBy = "nutzer", fetch = FetchType.EAGER)
-	private List<Warenkorb> warenkorb;
+	@OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
+	private List<Cart> carts;
 	
-	public Nutzer() {}
+	public Customer() {}
 	
-	public Nutzer(String name) {
+	public Customer(String name) {
 		this.name = name;
 	}
 
@@ -57,21 +57,21 @@ public class Nutzer {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public UUID getNutzerId() {
-		return nutzerId;
-	}
-
-	public void setNutzerId(UUID nutzerId) {
-		this.nutzerId = nutzerId;
-	}
 	
-	public List<Warenkorb> getWarenkorb() {
-		return warenkorb;
+	public UUID getCustomerId() {
+		return customerId;
 	}
 
-	public void setWarenkorb(List<Warenkorb> warenkorb) {
-		this.warenkorb = warenkorb;
+	public void setCustomerId(UUID customerId) {
+		this.customerId = customerId;
+	}
+
+	public List<Cart> getCart() {
+		return carts;
+	}
+
+	public void setCart(List<Cart> carts) {
+		this.carts = carts;
 	}
 	
 }

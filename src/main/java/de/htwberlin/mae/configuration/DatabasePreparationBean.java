@@ -1,11 +1,11 @@
 package de.htwberlin.mae.configuration;
 
-import de.htwberlin.mae.model.Artikel;
-import de.htwberlin.mae.model.Nutzer;
-import de.htwberlin.mae.model.Warenkorb;
-import de.htwberlin.mae.repository.ArtikelRepository;
-import de.htwberlin.mae.repository.NutzerRepository;
-import de.htwberlin.mae.repository.WarenkorbRepository;
+import de.htwberlin.mae.model.Article;
+import de.htwberlin.mae.model.Customer;
+import de.htwberlin.mae.model.Cart;
+import de.htwberlin.mae.repository.ArticleRepository;
+import de.htwberlin.mae.repository.CustomerRepository;
+import de.htwberlin.mae.repository.CartRepository;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,13 +26,13 @@ import java.util.ArrayList;
 public class DatabasePreparationBean implements CommandLineRunner {
 	
 	@Autowired //Autowired erzeugt ein Object
-	private NutzerRepository nutzerRepository;
+	private CustomerRepository usersRepository;
 	
 	@Autowired
-	private ArtikelRepository artikelRepository;
+	private ArticleRepository articleRepository;
 	
 	@Autowired
-	private WarenkorbRepository warenkorbRepository;
+	private CartRepository cartRepository;
 
     Logger log = LogManager.getRootLogger();
 
@@ -44,40 +44,41 @@ public class DatabasePreparationBean implements CommandLineRunner {
             log.info("db initial setup nutzer starts");
 
             //store users -> ID 1-6
-            ArrayList<Nutzer> nutzer = new ArrayList<Nutzer>();
-            nutzer.add(new Nutzer("Marcus Schindler"));
-            nutzer.add(new Nutzer("Fabian Mielke"));
-            nutzer.add(new Nutzer("Florian Heilscher"));
-            nutzer.add(new Nutzer("Aristide Defo"));
-            nutzer.add(new Nutzer("Edmodn Kengne"));
-            nutzer.add(new Nutzer("Mai Hong Nguyen"));
-            nutzerRepository.save(nutzer);
+            ArrayList<Customer> customers = new ArrayList<Customer>();
+            customers.add(new Customer("Marcus Schindler"));
+            customers.add(new Customer("Fabian Mielke"));
+            customers.add(new Customer("Florian Heilscher"));
+            customers.add(new Customer("Aristide Defo"));
+            customers.add(new Customer("Edmodn Kengne"));
+            customers.add(new Customer("Mai Hong Nguyen"));
+            log.info(customers);
+            usersRepository.save(customers);
           
             log.info("db initial setup artikel starts");
             //store artikel -> ID 7-13
-            ArrayList<Artikel> artikel = new ArrayList<Artikel>();
-            artikel.add(new Artikel("ID-1200", 4.99, "Bier"));
-            artikel.add(new Artikel("ID-1200", 4.99, "Vodka"));
-            artikel.add(new Artikel("ID-1201", 7.99, "Wein"));
-            artikel.add(new Artikel("ID-1202", 5.60, "Zigaretten"));
-            artikel.add(new Artikel("ID-1203", 15.99, "Rum"));
-            artikel.add(new Artikel("ID-1204", 0.99, "Feuerzeug"));
-            artikel.add(new Artikel("ID-1205", 1.49, "Chips"));
-            artikel.add(new Artikel("ID-1206", 0.69, "Wasser"));
-            artikelRepository.save(artikel);
+            ArrayList<Article> articles = new ArrayList<Article>();
+            articles.add(new Article("ID-1200", 4.99, "Bier"));
+            articles.add(new Article("ID-1200", 4.99, "Vodka"));
+            articles.add(new Article("ID-1201", 7.99, "Wein"));
+            articles.add(new Article("ID-1202", 5.60, "Zigaretten"));
+            articles.add(new Article("ID-1203", 15.99, "Rum"));
+            articles.add(new Article("ID-1204", 0.99, "Feuerzeug"));
+            articles.add(new Article("ID-1205", 1.49, "Chips"));
+            articles.add(new Article("ID-1206", 0.69, "Wasser"));
+            articleRepository.save(articles);
   
             log.info("db initial setup warenkorb starts");
             //store warenkörbe -> X-Y
             
-            ArrayList<Warenkorb> warenkorbs = new ArrayList<Warenkorb>();
+            ArrayList<Cart> carts = new ArrayList<Cart>();
             
-            warenkorbs.add(new Warenkorb(nutzerRepository.findByNameContainingIgnoreCase("Marcus Schindler").get(0), artikelRepository.findByBezeichnungIgnoreCase("Bier").get(0), 5));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findByNameContainingIgnoreCase("Florian Heilscher").get(0), artikelRepository.findByBezeichnungIgnoreCase("Bier").get(0), 1));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findByNameContainingIgnoreCase("Fabian Mielke").get(0), artikelRepository.findByBezeichnungIgnoreCase("Bier").get(0), 2));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findByNameContainingIgnoreCase("Aristide Defo").get(0), artikelRepository.findByBezeichnungIgnoreCase("Bier").get(0), 4));
-            warenkorbs.add(new Warenkorb(nutzerRepository.findByNameContainingIgnoreCase("Marcus Schindler").get(0), artikelRepository.findByBezeichnungIgnoreCase("Bier").get(0), 3));
+            carts.add(new Cart(usersRepository.findByNameContainingIgnoreCase("Marcus Schindler").get(0), articleRepository.findByLabelIgnoreCase("Bier").get(0), 5));
+            carts.add(new Cart(usersRepository.findByNameContainingIgnoreCase("Florian Heilscher").get(0), articleRepository.findByLabelIgnoreCase("Bier").get(0), 1));
+            carts.add(new Cart(usersRepository.findByNameContainingIgnoreCase("Fabian Mielke").get(0), articleRepository.findByLabelIgnoreCase("Bier").get(0), 2));
+            carts.add(new Cart(usersRepository.findByNameContainingIgnoreCase("Aristide Defo").get(0), articleRepository.findByLabelIgnoreCase("Bier").get(0), 4));
+            carts.add(new Cart(usersRepository.findByNameContainingIgnoreCase("Marcus Schindler").get(0), articleRepository.findByLabelIgnoreCase("Bier").get(0), 3));
             
-            warenkorbRepository.save(warenkorbs);
+            cartRepository.save(carts);
             log.info("db initial setup ends");
         }
         catch (Exception ex) {

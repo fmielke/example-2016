@@ -8,11 +8,11 @@ import org.springframework.data.rest.core.config.Projection;
  * @author marcus
  *
  */
-@Projection(name="anzahl-artikelbezeichnung", types={Warenkorb.class})
-public interface WarenkorbAnzahlArtikelProjection {
+@Projection(name="quantity-articlelabel", types={Cart.class})
+public interface CartQuantityArticleProjection {
 	
-	Integer getAnzahl();
+	Integer getQuantity();
 	
-	@Value("#{target.artikel.bezeichnung}")
-	String getBezeichnung();
+	@Value("#{target.article.label}")
+	String getLabel();
 }

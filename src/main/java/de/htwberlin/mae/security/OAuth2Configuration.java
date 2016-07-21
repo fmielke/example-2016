@@ -8,7 +8,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.oauth2.common.exceptions.InvalidGrantException;
+import org.springframework.security.oauth2.common.exceptions.InvalidTokenException;
+import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -17,6 +21,8 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
+
+import de.htwberlin.mae.exception.CustomOauthException;
 
 /**
  * Created by fmielke on 29.06.16.
@@ -65,7 +71,23 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter{
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        //TODO endpoints.pathMapping("/oauth/token", "/api/v1/oauth/token");
+        //TODO find correct Exceptions if time for it
+    	endpoints
+        .exceptionTranslator(exception -> {
+            if (exception instanceof OAuth2Exception) {
+            	//oauth2exception used for bad usernames and passwords
+            	log.info("oauth2exception");
+                OAuth2Exception oAuth2Exception = (OAuth2Exception) exception;
+                return ResponseEntity
+                        .status(oAuth2Exception.getHttpErrorCode())
+                        .body(new CustomOauthException(oAuth2Exception.getMessage()));
+	        }
+            else {
+            	log.info("undefined exception");
+            	log.info(exception.getClass());
+            	throw exception;
+            }
+        });
         endpoints.tokenStore(tokenStore()).tokenEnhancer(jwtTokenEnhancer()).authenticationManager(authenticationManager);
     }
 

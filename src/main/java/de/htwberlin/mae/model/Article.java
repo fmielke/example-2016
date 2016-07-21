@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Artikel {
+public class Article {
 	
 	@Version // generates E-TAG Header
 	private Long version;
@@ -35,70 +35,70 @@ public class Artikel {
 	@Id
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
-	private UUID artikelId;
+	private UUID articleId;
 
 	@NotNull(message = "{artikel.produktCode.notnull.message}")
 	@Size(min=5, max=10, message="{artikel.produktCode.minmax.message}")
-	private String produktCode;
+	private String productCode;
 	
 	@NotNull(message = "{artikel.bezeichnung.notnull.message}")
 	@Size(min=2, max=255, message="{artikel.bezeichnung.minmax.message}")
-	private String bezeichnung;
+	private String label;
 	
 	@NotNull(message = "{artikel.preis.notnull.message}")
 	@Min(value = 0, message="{artikel.preis.min.message}")
-	private Double preis;
+	private Double price;
 	
-	@OneToMany(mappedBy = "artikel", fetch = FetchType.EAGER)
-	private List<Warenkorb> warenkorb;
+	@OneToMany(mappedBy = "article", fetch = FetchType.EAGER)
+	private List<Cart> carts;
 		
-	public Artikel() {}
+	public Article() {}
 	
-	public Artikel(String produktCode, Double preis, String bezeichnung) {
-		this.bezeichnung = bezeichnung;
-		this.produktCode = produktCode;
-		this.preis = preis;
+	public Article(String productCode, Double price, String label) {
+		this.label = label;
+		this.productCode = productCode;
+		this.price = price;
 	}
 
 	
-	public UUID getArtikelId() {
-		return artikelId;
-	}
-	
-	public void setArtikelId(UUID artikelId) {
-		this.artikelId = artikelId;
+	public UUID getArticleId() {
+		return articleId;
 	}
 	
-	public String getProduktCode() {
-		return produktCode;
-	}
-
-	public void setProduktCode(String produktCode) {
-		this.produktCode = produktCode;
-	}
-
-	public String getBezeichnung() {
-		return bezeichnung;
-	}
-
-	public void setBezeichnung(String bezeichnung) {
-		this.bezeichnung = bezeichnung;
-	}
-
-	public Double getPreis() {
-		return preis;
-	}
-
-	public void setPreis(Double preis) {
-		this.preis = preis;
+	public void setArticleId(UUID articleId) {
+		this.articleId = articleId;
 	}
 	
-	public List<Warenkorb> getWarenkorb() {
-		return warenkorb;
+	public String getProductCode() {
+		return productCode;
 	}
 
-	public void setWarenkorb(List<Warenkorb> warenkorb) {
-		this.warenkorb = warenkorb;
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
+	public List<Cart> getCart() {
+		return carts;
+	}
+
+	public void setCart(List<Cart> carts) {
+		this.carts = carts;
 	}
 		
 }

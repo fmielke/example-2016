@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Warenkorb {
+public class Cart {
 	
 	@Version // generates E-TAG Header
 	private Long version;
@@ -34,64 +34,64 @@ public class Warenkorb {
 	@Id
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
-	private UUID warenkorbId;
+	private UUID cartId;
 	
 	@NotNull
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "artikel_id")
-	private Artikel artikel;
+	@JoinColumn(name = "article_id")
+	private Article article;
 	
 	@NotNull
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "nutzer_id")
-	private Nutzer nutzer;
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
 	
 	@NotNull(message = "{warenkorb.anzahl.notnull.message}")
 	@Min(value = 1, message = "{warenkorb.anzahl.min.message}")
-	public Integer anzahl;
+	public Integer quantity;
 
-	public Warenkorb() {}
+	public Cart() {}
 	
-	public Warenkorb(Nutzer nutzer, Artikel artikel, Integer anzahl){
-		this.nutzer = nutzer;
-		this.artikel = artikel;
-		this.anzahl = anzahl;
-	}
-	
-	public UUID getWarenkorbId() {
-		return warenkorbId;
-	}
-
-	public void setWarenkorbId(UUID warenkorbId) {
-		this.warenkorbId = warenkorbId;
-	}
-
-	public Nutzer getNutzer() {
-		return nutzer;
-	}
-
-	public void setNutzer(Nutzer nutzer) {
-		this.nutzer = nutzer;
+	public Cart(Customer customer, Article artikel, Integer quantity){
+		this.customer = customer;
+		this.article = artikel;
+		this.quantity = quantity;
 	}
 	
-	public Artikel getArtikel() {
-		return artikel;
+	public UUID getCartId() {
+		return cartId;
 	}
 
-	public void setArtikel(Artikel artikel) {
-		this.artikel = artikel;
+	public void setCartId(UUID cartId) {
+		this.cartId = cartId;
 	}
 
-	public Integer getAnzahl() {
-		return anzahl;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setAnzahl(Integer anzahl) {
-		this.anzahl = anzahl;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	
+	public Article getArticle() {
+		return article;
+	}
+
+	public void setArtcle(Article article) {
+		this.article = article;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 	
 	@Override
 	public String toString() {
-		return this.nutzer.getName() + " | " + this.artikel.getBezeichnung() + " | " + this.getAnzahl();
+		return this.customer.getName() + " | " + this.article.getLabel() + " | " + this.getQuantity();
 	}
 }

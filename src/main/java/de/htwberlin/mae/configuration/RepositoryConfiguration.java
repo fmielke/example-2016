@@ -1,6 +1,6 @@
 package de.htwberlin.mae.configuration;
 
-import de.htwberlin.mae.eventhandler.NutzerEventHandler;
+import de.htwberlin.mae.eventhandler.CustomerEventHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class RepositoryConfiguration {
 
         @Bean
-        NutzerEventHandler nutzerEventHandler() {
-            return new NutzerEventHandler();
+        CustomerEventHandler nutzerEventHandler() {
+            return new CustomerEventHandler();
         }
 }

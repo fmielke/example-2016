@@ -1,5 +1,7 @@
 package de.htwberlin.mae.security;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * Created by fmielke on 29.06.16.
@@ -24,21 +27,28 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .regexMatchers(HttpMethod.GET, ".*nutzer.*").access("#oauth2.hasAnyScope('nutzer.read, nutzer.all')")
-                .regexMatchers(HttpMethod.POST, ".*nutzer.*").access("#oauth2.hasAnyScope('nutzer.write, nutzer.all')")
-                .regexMatchers(HttpMethod.PUT, ".*nutzer.*").access("#oauth2.hasAnyScope('nutzer.write, nutzer.all')")
-                .regexMatchers(HttpMethod.DELETE, ".*nutzer.*").access("#oauth2.hasAnyScope('nutzer.delete, nutzer.all')")
+        .csrf().disable()
+        .exceptionHandling()
+		.authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+		.and()
+		.csrf()
+		.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/oauth/authorize")) 
+		.disable()
+        .authorizeRequests()
+        .regexMatchers(HttpMethod.GET, ".*customers.*").access("#oauth2.hasAnyScope('nutzer.read, nutzer.all')")
+        .regexMatchers(HttpMethod.POST, ".*customers.*").access("#oauth2.hasAnyScope('nutzer.write, nutzer.all')")
+        .regexMatchers(HttpMethod.PUT, ".*customers.*").access("#oauth2.hasAnyScope('nutzer.write, nutzer.all')")
+        .regexMatchers(HttpMethod.DELETE, ".*customers.*").access("#oauth2.hasAnyScope('nutzer.delete, nutzer.all')")
 
-                .regexMatchers(HttpMethod.GET, ".*artikel.*").access("#oauth2.hasAnyScope('artikel.read, artikel.all')")
-                .regexMatchers(HttpMethod.POST, ".*artikel.*").access("#oauth2.hasAnyScope('artikel.write, artikel.all')")
-                .regexMatchers(HttpMethod.PUT, ".*artikel.*").access("#oauth2.hasAnyScope('artikel.write, artikel.all')")
-                .regexMatchers(HttpMethod.DELETE, ".*artikel.*").access("#oauth2.hasAnyScope('artikel.delete, artikel.all')")
+        .regexMatchers(HttpMethod.GET, ".*article.*").access("#oauth2.hasAnyScope('artikel.read, artikel.all')")
+        .regexMatchers(HttpMethod.POST, ".*article.*").access("#oauth2.hasAnyScope('artikel.write, artikel.all')")
+        .regexMatchers(HttpMethod.PUT, ".*article.*").access("#oauth2.hasAnyScope('artikel.write, artikel.all')")
+        .regexMatchers(HttpMethod.DELETE, ".*article.*").access("#oauth2.hasAnyScope('artikel.delete, artikel.all')")
 
-                .regexMatchers(HttpMethod.GET, ".*warenkorb.*").access("#oauth2.hasAnyScope('warenkorb.read, warenkorb.all')")
-                .regexMatchers(HttpMethod.POST, ".*warenkorb.*").access("#oauth2.hasAnyScope('warenkorb.write, warenkorb.all')")
-                .regexMatchers(HttpMethod.PUT, ".*warenkorb.*").access("#oauth2.hasAnyScope('warenkorb.write, warenkorb.all')")
-                .regexMatchers(HttpMethod.DELETE, ".*warenkorb.*").access("#oauth2.hasAnyScope('warenkorb.delete, warenkorb.all')");
+        .regexMatchers(HttpMethod.GET, ".*carts.*").access("#oauth2.hasAnyScope('warenkorb.read, warenkorb.all')")
+        .regexMatchers(HttpMethod.POST, ".*carts.*").access("#oauth2.hasAnyScope('warenkorb.write, warenkorb.all')")
+        .regexMatchers(HttpMethod.PUT, ".*carts.*").access("#oauth2.hasAnyScope('warenkorb.write, warenkorb.all')")
+        .regexMatchers(HttpMethod.DELETE, ".*carts.*").access("#oauth2.hasAnyScope('warenkorb.delete, warenkorb.all')");
     }
 
     @Override
