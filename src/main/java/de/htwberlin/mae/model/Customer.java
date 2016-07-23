@@ -36,8 +36,8 @@ public class Customer {
 	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
 	private UUID customerId;
 
-	@NotNull(message = "{nutzer.name.notnull.message}")
-	@Size(min=2, max=255, message = "{nutzer.name.minmax.message}")
+	@NotNull(message = "{customer.name.notnull.message}")
+	@Size(min=2, max=255, message = "{customer.name.minmax.message}")
 	private String name;
 	
 	@OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)

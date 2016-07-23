@@ -46,8 +46,8 @@ public class Cart {
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 	
-	@NotNull(message = "{warenkorb.anzahl.notnull.message}")
-	@Min(value = 1, message = "{warenkorb.anzahl.min.message}")
+	@NotNull(message = "{cart.quantity.notnull.message}")
+	@Min(value = 1, message = "{cart.quantity.min.message}")
 	public Integer quantity;
 
 	public Cart() {}

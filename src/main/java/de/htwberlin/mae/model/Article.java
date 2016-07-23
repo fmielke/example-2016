@@ -37,16 +37,16 @@ public class Article {
 	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
 	private UUID articleId;
 
-	@NotNull(message = "{artikel.produktCode.notnull.message}")
-	@Size(min=5, max=10, message="{artikel.produktCode.minmax.message}")
+	@NotNull(message = "{article.productCode.notnull.message}")
+	@Size(min=5, max=10, message="{article.productCode.minmax.message}")
 	private String productCode;
 	
-	@NotNull(message = "{artikel.bezeichnung.notnull.message}")
-	@Size(min=2, max=255, message="{artikel.bezeichnung.minmax.message}")
+	@NotNull(message = "{article.label.notnull.message}")
+	@Size(min=2, max=255, message="{article.label.minmax.message}")
 	private String label;
 	
-	@NotNull(message = "{artikel.preis.notnull.message}")
-	@Min(value = 0, message="{artikel.preis.min.message}")
+	@NotNull(message = "{article.price.notnull.message}")
+	@Min(value = 0, message="{article.price.min.message}")
 	private Double price;
 	
 	@OneToMany(mappedBy = "article", fetch = FetchType.EAGER)
