@@ -1,3 +1,3 @@
 # example-2016
 
-HTW-Berlin REST Project
+Beispielanwendung für den Leitfaden REST-API im Kurs Management der Anwendungsentwicklung der HTW-Berlin.
