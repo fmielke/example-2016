@@ -12,4 +12,5 @@ Es handlet sich um ein Spring-Boot Project. Zum Ausführen des Programmes auf de
 
 ## Authentication 
 Der Username und das Kennwort steht im Code in der Klasse WebSecurityConfiguration
-1. Request Token: http://localhost:8080/oauth/token?grant_type=password&username=USERNAME&password=PASSWORD
+
+- Request Token URL: http://localhost:8080/oauth/token?grant_type=password&username=USERNAME&password=PASSWORD
